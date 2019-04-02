@@ -1,0 +1,20 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">MultipleItemPage</string>
+    <string name="title_home">历史记录</string>
+    <string name="title_category">首页</string>
+    <string name="title_cart">首页2</string>
+    <string name="title_my">我的</string>
+    <string name="latest_update_time">latest update time: <xliff:g id="UPDATE_TIME">%1$s</xliff:g></string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>
