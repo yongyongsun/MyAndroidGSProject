@@ -2,31 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:ellipsize="end"
-        android:lineSpacingMultiplier="1.25"
-        android:maxLines="3"
-        android:paddingBottom="4dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="8dp"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        tools:text="开豪车竟还有这样的烦恼？一个月得赔3000块？网友恨的牙痒痒" />
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/list_item_padding"
+    android:paddingTop="@dimen/list_item_padding"
+    android:paddingBottom="@dimen/list_item_padding">
 
     <ImageView
         android:id="@+id/img_Pic"
+        android:layout_width="@dimen/list_item_height"
+        android:layout_height="@dimen/list_item_height"
+        android:src="@drawable/pdf" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/list_item_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="张三--工商抽检" />
+
+        <TextView
+            android:id="@+id/tv_datatime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/list_item_padding"
+            android:gravity="bottom"
+            android:text="2019-04-02 16:55" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_filesize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:adjustViewBounds="true"
-        android:background="#D8D8D8" />
+        android:layout_gravity="bottom"
+        android:gravity="right"
+        android:text="39.79MB" />
+
 
 </LinearLayout>

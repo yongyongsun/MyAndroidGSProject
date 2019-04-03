@@ -5,5 +5,8 @@
     <!-- 标题栏高度 -->
     <dimen name="sign_actionbar_height">46dp</dimen>
     <!-- 标题栏文字大小 -->
-    <dimen name="sign_actionbar_text_size">16sp</dimen>
+    <dimen name="sign_actionbar_text_size">16dp</dimen>
+    <!-- 文件列表项高度 -->
+    <dimen name="list_item_height">56dp</dimen>
+    <dimen name="list_item_padding">6dp</dimen>
 </resources>

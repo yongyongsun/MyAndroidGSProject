@@ -221,6 +221,8 @@ public class Fragment1 extends Fragment {
         class ViewHolder {
             private TextView txtTitle;
             private ImageView imgPic;
+            private TextView dataTime;
+            private TextView fileSize;
         }
     }
 }
