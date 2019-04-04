@@ -8,7 +8,7 @@
         autoloading="true"
         app:autoFlushing="true"
         app:autoLoading="false"
-        app:flushingEnable="false"
+        app:flushingEnable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

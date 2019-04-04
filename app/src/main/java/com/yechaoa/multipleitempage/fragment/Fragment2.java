@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import com.yechaoa.multipleitempage.R;
+import com.yechaoa.yutils.YUtils;
 
 public class Fragment2 extends Fragment {
    // private WebView mWebView;
@@ -24,6 +27,15 @@ public class Fragment2 extends Fragment {
     public void onStart() {
         super.onStart();
 
+        TextView tv_submit_view = getActivity().findViewById(R.id.tv_submit);
+        tv_submit_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText text = getActivity().findViewById(R.id.sub_iv_sample_name).findViewById(R.id.et_input);
+                String ss = text.getText().toString();
+                YUtils.showToast(ss);
+            }
+        });
 //        mWebView = getActivity().findViewById(R.id.fragment2_main_webview);
 //
 //        // Force links and redirects to open in the WebView instead of in a browser

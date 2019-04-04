@@ -1,5 +1,6 @@
 package com.yechaoa.multipleitempage.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -68,6 +69,7 @@ public class Fragment4 extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light);
 
+        //暂时不处理刷新 by syy
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,48 +89,12 @@ public class Fragment4 extends Fragment {
     private void initItemData() {
         itemDataList = new ArrayList<>();
 
-        multipleItem = new MultipleItem(MultipleItem.TYPE_COUNT, 5);
-        multipleItem.mString1 = "收藏";
-        multipleItem.mString2 = "关注";
+        multipleItem = new MultipleItem(MultipleItem.TYPE_MY_SHOW, 5);
+        multipleItem.mStrPhone = "13938845889";
+        multipleItem.mStrRole = "角色";
+        multipleItem.mStrClass = "工程部";
+        multipleItem.mStrStation = "工程师";
         itemDataList.add(multipleItem);
-
-        multipleItem = new MultipleItem(MultipleItem.TYPE_ORDER_HEADER, 5);
-        multipleItem.mString2 = "type2";
-        itemDataList.add(multipleItem);
-
-        for (int i = 0; i < 5; i++) {
-            multipleItem = new MultipleItem(MultipleItem.TYPE_ORDER, 1);
-            multipleItem.mString1 = "待付款";
-            if (i % 2 == 0) {
-                multipleItem.isShow = true;
-                multipleItem.count = 6;
-            } else {
-                multipleItem.isShow = false;
-                multipleItem.count = 0;
-            }
-            itemDataList.add(multipleItem);
-        }
-
-        multipleItem = new MultipleItem(MultipleItem.TYPE_BALANCE, 5);
-        multipleItem.mString1 = "￥9999.00";
-        itemDataList.add(multipleItem);
-
-        multipleItem = new MultipleItem(MultipleItem.TYPE_TOOLS_HEADER, 5);
-        multipleItem.mString1 = "type5";
-        itemDataList.add(multipleItem);
-
-        for (int i = 0; i < 5; i++) {
-            multipleItem = new MultipleItem(MultipleItem.TYPE_TOOLS, 1);
-            multipleItem.mString1 = "使用帮助";
-            if (i % 2 == 0) {
-                multipleItem.isShow = true;
-                multipleItem.count = 100;
-            } else {
-                multipleItem.isShow = false;
-                multipleItem.count = 0;
-            }
-            itemDataList.add(multipleItem);
-        }
     }
 
 
@@ -146,24 +112,25 @@ public class Fragment4 extends Fragment {
                         YUtils.showToast("你点击了头像");
                         break;
                     case R.id.my_header_settings:
-                        //YUtils.showToast("你点击了设置");
+                        YUtils.showToast("你点击了设置");
+
                         //add by syy
-                        AndroidAsyncHttpHelper.getInstance().get(getContext(), "http://www.baidu.com", new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                String str = new String(bytes);
-                                YUtils.showToast(i + ":" + str);
-
-                            }
-
-                            @Override
-                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                                YUtils.showToast("失败");
-                                String str = new String(bytes);
-                                YUtils.showToast( "失败：" + str);
-
-                            }
-                        });
+//                        AndroidAsyncHttpHelper.getInstance().get(getContext(), "http://www.baidu.com", new AsyncHttpResponseHandler() {
+//                            @Override
+//                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+//                                String str = new String(bytes);
+//                                YUtils.showToast(i + ":" + str);
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+//                                YUtils.showToast("失败");
+//                                String str = new String(bytes);
+//                                YUtils.showToast( "失败：" + str);
+//
+//                            }
+//                        });
                         break;
                 }
             }
@@ -207,17 +174,7 @@ public class Fragment4 extends Fragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                YUtils.showToast("第  " + position);
-
-                //可以再加一层 类型 的判断，一般来说订单不是点了就消失的
-                if (itemDataList.get(position).getItemType() == MultipleItem.TYPE_TOOLS) {
-                    if (itemDataList.get(position).isShow) {
-                        itemDataList.get(position).isShow = false;
-                        LogUtil.i("count  =  " + itemDataList.get(position).count);
-                        multipleItemQuickAdapter.notifyItemChanged(position + 1);
-                    } else
-                        itemDataList.get(position).isShow = false;
-                }
+                //YUtils.showToast("第  " + position);
 
             }
         });
@@ -226,17 +183,14 @@ public class Fragment4 extends Fragment {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
-                    case R.id.my_favorites:
-                        YUtils.showToast("收藏");
+                    case R.id.iv_about:
+                        YUtils.showToast("关于");
                         break;
-                    case R.id.my_bands:
-                        YUtils.showToast("关注");
+                    case R.id.iv_help:
+                        YUtils.showToast("帮助");
                         break;
-                    case R.id.ll_my_order:
-                        YUtils.showToast("全部订单");
-                        break;
-                    case R.id.my_balance_btn:
-                        YUtils.showToast("立即充值");
+                    case R.id.iv_logout:
+                        YUtils.showToast("退出");
                         break;
                 }
             }

@@ -1,17 +1,422 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"    >
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include
+                layout="@layout/layout_work_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 样品名称 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_sample_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="样品名称" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Fragment    2"
-        android:textSize="30sp"/>
+                <!-- 商标 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_mark"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    app:show_label="商标"
+                    android:layout_height="wrap_content" />
 
-    <!--<WebView-->
-        <!--android:id="@+id/fragment2_main_webview"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
+                <!-- 等级 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_level"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    app:show_label="等级"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
 
-</FrameLayout>
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 规格型号 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="规格型号" />
+
+                <!-- 产品标准 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_standard"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    app:show_label="产品标准"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 生产日期 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_manufacture_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="生产日期" />
+
+                <!-- 样品编号 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_smaple_no"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    app:show_label="样品编号"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 销售单价 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_sale_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="销售单价" />
+
+                <!-- 进货量 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_purchase_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="进货量" />
+                <!-- 销售量 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_sale_volume"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="销售量" />
+                <!-- 存货量 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_inventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="存货量" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 检验用样品数量 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_check_sample_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="检验用样品数量" />
+
+                <!-- 备份样品数量 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_backup_sample_count"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    app:show_label="备份样品数量"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 备份样品封存地 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_backup_sample_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="备份样品封存地" />
+
+                <!-- 存货地点 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_inventory_a"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    app:show_label="存货地点"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 经营者名称 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="经营者名称" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 通信地址 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="通讯地址" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 法定代表人 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_owner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="法定代表人" />
+                <!-- 电话 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_owner_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="电话" />
+                <!-- 传真 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_owner_fax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="传真" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 联系人 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="联系人" />
+                <!-- 移动电话 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_mobile_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="移动电话" />
+                <!-- E-mail -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="E-mail" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 经营者所在地 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="经营者所在地" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 抽查检验场所 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_check_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="抽查检验场所" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 生产或供货单位名称 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_supplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="生产或供货单位名称" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 通讯地址 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_supplier_addi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="通讯地址" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
+
+            <!-- ================================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 联系人 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_supplier_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="联系人" />
+                <!-- 电话 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_supplier_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="电话" />
+                <!-- 传真 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_product_supplier_fax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:show_label="传真" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tv_submit"
+                android:text="aaaaaaaaaaa"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/list_item_padding"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_operator_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="签章"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:textSize="@dimen/sub_item_text_size"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lineGray" />
+        <TextView
+            android:id="@+id/tv_operator_printing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手写签名"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            android:textSize="@dimen/sub_item_text_size"/>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/tv_sign_img"
+        android:layout_width="@dimen/sign_img_width"
+        android:layout_height="@dimen/sign_img_height"
+        android:textSize="20dp"
+        android:text="测试文字"
+        android:src="@drawable/splash"/>
+
+
+</LinearLayout>

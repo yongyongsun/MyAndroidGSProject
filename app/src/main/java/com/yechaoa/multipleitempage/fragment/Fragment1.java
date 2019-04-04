@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+import com.yechaoa.yutils.YUtils;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,7 +32,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment{
 
     private SwipeFlushView swipeFlushView;
     private MyAdapter adapter;
@@ -55,6 +57,14 @@ public class Fragment1 extends Fragment {
         ListView listView = (ListView) getActivity().findViewById(R.id.listView);
         adapter = new MyAdapter(dataList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EntityInfo.ResultBean.ListBean item = (EntityInfo.ResultBean.ListBean)adapter.getItem(i);
+                YUtils.showToast("点击了 = " + item.getTitle());
+
+            }
+        });
 
         // 刷新事件
         swipeFlushView.setOnFlushListener(() -> {
@@ -130,12 +140,12 @@ public class Fragment1 extends Fragment {
                 case -1:
                     weakReference.get().swipeFlushView.setFlushing(false);
                     weakReference.get().swipeFlushView.setLoading(false);
-                    //Toast.makeText(weakReference.get(), "获取数据失败！", Toast.LENGTH_SHORT).show();
+                    YUtils.showToast("获取数据失败！");
                     break;
                 case 0:
                     weakReference.get().swipeFlushView.setFlushing(false);
                     weakReference.get().swipeFlushView.setLoading(false);
-                   // Toast.makeText(weakReference.get(), "没有更多的数据！", Toast.LENGTH_SHORT).show();
+                    YUtils.showToast("没有更多的数据！");
                     break;
                 case 1:
                     weakReference.get().adapter.notifyDataSetChanged();
@@ -148,10 +158,10 @@ public class Fragment1 extends Fragment {
                 case 3:
                     if (weakReference.get().pageNum == 1) {
                         weakReference.get().swipeFlushView.setFlushing(false);
-                        //Toast.makeText(weakReference.get(), "刷新失败！", Toast.LENGTH_SHORT).show();
+                        YUtils.showToast("刷新失败！");
                     } else if (weakReference.get().pageNum > 1) {
                         weakReference.get().swipeFlushView.setLoading(false);
-                        //Toast.makeText(weakReference.get(), "加载失败！", Toast.LENGTH_SHORT).show();
+                        YUtils.showToast("加载失败！");
                     }
                     break;
                 default:
@@ -208,12 +218,15 @@ public class Fragment1 extends Fragment {
             }
 
             holder.txtTitle.setText(dataList.get(i).getTitle());
-            // 给 ImageView 打标记，避免图片复用问题
-            String imgUrl = TextUtils.isEmpty(dataList.get(i).getFirstImg()) ? "http://img5.imgtn.bdimg.com/it/u=4004044022,1540768321&fm=27&gp=0.jpg" : dataList.get(i).getFirstImg();
-            if (!(dataList.get(i).getUrl() + i).equals(holder.imgPic.getTag(R.id.img_Pic))) {
-                Picasso.with(getActivity()).load(imgUrl).into(holder.imgPic);
-                holder.imgPic.setTag(R.id.img_Pic, dataList.get(i).getUrl() + i);
-            }
+
+
+//            //注释文件图标部分，暂时使用pdf图标
+//            // 给 ImageView 打标记，避免图片复用问题
+//            String imgUrl = TextUtils.isEmpty(dataList.get(i).getFirstImg()) ? "http://img5.imgtn.bdimg.com/it/u=4004044022,1540768321&fm=27&gp=0.jpg" : dataList.get(i).getFirstImg();
+//            if (!(dataList.get(i).getUrl() + i).equals(holder.imgPic.getTag(R.id.img_Pic))) {
+//                Picasso.with(getActivity()).load(imgUrl).into(holder.imgPic);
+//                holder.imgPic.setTag(R.id.img_Pic, dataList.get(i).getUrl() + i);
+//            }
 
             return view;
         }
