@@ -191,6 +191,7 @@ public class Fragment4 extends Fragment {
                         break;
                     case R.id.iv_logout:
                         YUtils.showToast("退出");
+
                         break;
                 }
             }

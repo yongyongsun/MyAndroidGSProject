@@ -15,4 +15,5 @@
     <dimen name="sub_item_height">42dp</dimen>
     <dimen name="sign_img_width">360dp</dimen>
     <dimen name="sign_img_height">360dp</dimen>
+    <dimen name="margin">16dp</dimen>
 </resources>

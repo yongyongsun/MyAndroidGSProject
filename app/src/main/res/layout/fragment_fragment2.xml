@@ -408,7 +408,11 @@
                 android:layout_height="1dp"
                 android:background="@color/lineGray" />
 
-
+            <include
+                android:id="@+id/ly_sign_bottom_view"
+                layout="@layout/layout_work_seal_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
 
             <TextView

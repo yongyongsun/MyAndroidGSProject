@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/list_item_padding"
     android:orientation="horizontal">
@@ -17,6 +17,7 @@
             android:gravity="center"
             android:layout_marginLeft="@dimen/list_item_padding"
             android:layout_marginRight="@dimen/list_item_padding"
+            android:layout_marginBottom="30dp"
             android:textSize="@dimen/sub_item_text_size"/>
         <TextView
             android:layout_width="match_parent"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="手写签名"
             android:gravity="center"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="@dimen/list_item_padding"
             android:layout_marginRight="@dimen/list_item_padding"
             android:textSize="@dimen/sub_item_text_size"/>
