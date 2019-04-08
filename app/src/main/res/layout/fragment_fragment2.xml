@@ -26,7 +26,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="样品名称" />
+                    app:show_label="样品名称" >
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </com.yechaoa.multipleitempage.bean.sub_item_view>
 
                 <!-- 商标 -->
                 <com.yechaoa.multipleitempage.bean.sub_item_view
@@ -307,16 +312,47 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 经营者所在地 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
-                    android:id="@+id/sub_iv_operator_location"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/sub_item_right_left_padding"
+                    android:textSize="@dimen/sub_item_text_size"
+                    android:layout_margin="@dimen/list_item_padding"
+                    android:text="经营者所在地" />
+
+                <RadioGroup
+                    android:id="@+id/rd_group_operator_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:show_label="经营者所在地" />
+                    android:checkedButton="@id/rd_location_1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_location_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:text="@string/str_location_1"/>
+                    <RadioButton
+                        android:id="@+id/rd_location_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:text="@string/str_location_2"/>
+                    <RadioButton
+                        android:id="@+id/rd_location_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:text="@string/str_location_3"/>
+                </RadioGroup>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="14dp"
                 android:background="@color/lineGray" />
 
             <!-- ================================================== -->
@@ -325,12 +361,71 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 抽查检验场所 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
-                    android:id="@+id/sub_iv_check_place"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:show_label="抽查检验场所" />
+                    android:paddingLeft="@dimen/sub_item_right_left_padding"
+                    android:textSize="@dimen/sub_item_text_size"
+                    android:layout_margin="@dimen/list_item_padding"
+                    android:text="抽查检验场所" />
+                <RadioGroup
+                    android:id="@+id/rd_group_check_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@id/rd_check_place_1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_check_place_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_1"
+                        />
+                    <RadioButton
+                        android:id="@+id/rd_check_place_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_2"/>
+                    <RadioButton
+                        android:id="@+id/rd_check_place_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_3"/>
+                    <RadioButton
+                        android:id="@+id/rd_check_place_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_4"/>
+                    <RadioButton
+                        android:id="@+id/rd_check_place_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_5"/>
+                    <RadioButton
+                        android:id="@+id/rd_check_place_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_6"/>
+                    <RadioButton
+                        android:id="@+id/rd_check_place_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sub_item_radio_text_size"
+                        android:layout_weight="1"
+                        android:text="@string/str_place_7"/>
+                </RadioGroup>
             </LinearLayout>
 
 

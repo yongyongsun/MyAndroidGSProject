@@ -26,6 +26,7 @@ import com.yechaoa.yutils.YUtils;
  */
 public class AndroidAsyncHttpHelper {
 
+	private final static String URL = "http://ip:port/app/";
 	private static AndroidAsyncHttpHelper instance;
 
 	private AndroidAsyncHttpHelper() {

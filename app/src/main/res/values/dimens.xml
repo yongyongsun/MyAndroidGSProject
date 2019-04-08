@@ -11,6 +11,7 @@
     <dimen name="list_item_padding">6dp</dimen>
     <!-- 商品属性页字体大小 -->
     <dimen name="sub_item_text_size">20dp</dimen>
+    <dimen name="sub_item_radio_text_size">18dp</dimen>
     <dimen name="sub_item_right_left_padding">14dp</dimen>
     <dimen name="sub_item_height">42dp</dimen>
     <dimen name="sign_img_width">360dp</dimen>

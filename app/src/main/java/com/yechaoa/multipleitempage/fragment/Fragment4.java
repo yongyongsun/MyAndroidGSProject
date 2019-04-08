@@ -199,4 +199,7 @@ public class Fragment4 extends Fragment {
 
     }
 
+    public void getLoginData(String str){
+        YUtils.showToast(str);
+    }
 }

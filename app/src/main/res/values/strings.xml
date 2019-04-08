@@ -6,16 +6,27 @@
     <string name="title_my">我的</string>
     <string name="latest_update_time">latest update time: <xliff:g id="UPDATE_TIME">%1$s</xliff:g></string>
 
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_email">请输入账号</string>
+    <string name="prompt_password">请输入密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不正确</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="str_work_header">湖南省市场监督管理局\n产商品质量抽查检验工作单</string>
+    <string name="str_location_1">城区</string>
+    <string name="str_location_2">城乡结合部</string>
+    <string name="str_location_3">乡镇</string>
+
+    <string name="str_place_1">集贸市场</string>
+    <string name="str_place_2">专业市场</string>
+    <string name="str_place_3">商场</string>
+    <string name="str_place_4">超市</string>
+    <string name="str_place_5">专卖店</string>
+    <string name="str_place_6">小商铺</string>
+    <string name="str_place_7">其他</string>
 </resources>

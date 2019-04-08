@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onPageScrollStateChanged(int state) {
 
+//            //登录成功时候，从loginActivity获取收据，同时刷新fragment4数据。
+//            SimpleFragmentPagerAdapter adpter = (SimpleFragmentPagerAdapter)mViewPager.getAdapter();
+//            Fragment4 fragmen = (Fragment4)adpter.getItem(3);
+//            fragmen.getLoginData("32323232323323233");
+
         }
     };
 
