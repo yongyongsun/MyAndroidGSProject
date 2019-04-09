@@ -234,6 +234,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="通讯地址" />
+                <!-- 邮编 -->
+                <com.yechaoa.multipleitempage.bean.sub_item_view
+                    android:id="@+id/sub_iv_operator_postalcode"
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    app:show_label="邮编"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
@@ -509,12 +516,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineGray" />
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="提交"
+                android:textColor="@color/red"
+                android:textSize="26dp" />
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tv_submit"
-                android:text="aaaaaaaaaaa"/>
+                android:layout_height="14dp"
+                android:background="@color/lineGray" />
 
         </LinearLayout>
     </ScrollView>
