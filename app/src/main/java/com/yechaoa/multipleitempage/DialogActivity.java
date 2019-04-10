@@ -73,7 +73,11 @@ public class DialogActivity extends FragmentActivity {
     private TextView mTxtStatus;
     private ImageView mImgView;
 
-    private BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+    private Bitmap mCurBitmap;
+
+    private BroadcastReceiver mUsbReceiver = null;
+
+    class FinterReceiver extends  BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -96,7 +100,6 @@ public class DialogActivity extends FragmentActivity {
             }
         }
     };
-
     private void OpenDeviceAndRequestDevice()
     {
         if (mbStart)
@@ -151,6 +154,8 @@ public class DialogActivity extends FragmentActivity {
         getWindow().setAttributes(params);
         getWindow().setGravity(Gravity.CENTER);
 
+        mUsbReceiver = new FinterReceiver();
+        mCurBitmap = null;
         mTestFeature = Base64.decode(mstrTemplate, Base64.NO_WRAP);
         mContext = this.getApplicationContext();
         mTxtReport = (TextView)findViewById(R.id.txtReport);
@@ -158,12 +163,13 @@ public class DialogActivity extends FragmentActivity {
         mImgView  = findViewById(R.id.iv_finger_print);
         mTxtReport.setText("");
         startFingerVeinSensor();
+
+        OpenDeviceAndRequestDevice();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        CloseDevice();
     }
 
     @Override
@@ -174,7 +180,11 @@ public class DialogActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        CloseDevice();  //尝试关闭设备
+        //CloseDevice(false);  //尝试关闭设备
+        if (mUsbReceiver != null) {
+            mContext.unregisterReceiver(mUsbReceiver);
+        }
+
         // Destroy fingerprint sensor when it's not used
         NIDFPFactory.destroy(mNIDFPSensor);
     }
@@ -214,6 +224,12 @@ public class DialogActivity extends FragmentActivity {
                         Bitmap bitmap = ToolUtils.renderCroppedGreyScaleBitmap(mBufImage, mNIDFPSensor.getFpImgWidth(), mNIDFPSensor.getFpImgHeight());
                         mImgView.setImageBitmap(bitmap);
                         mTxtStatus.setText("ImageQualityScore:" + qualityScore);
+
+                        //add 指纹分数超过60分后，读取成功，退出线程。
+                        if (qualityScore > 60){
+                            mCurBitmap = bitmap;
+                            CloseDevice(true);
+                        }
                     }
                 });
                 if (1 !=  ret || qualityScore < 45)
@@ -295,7 +311,7 @@ public class DialogActivity extends FragmentActivity {
     }
 
 
-    void CloseDevice()
+    void CloseDevice(boolean bsaveData)
     {
         if (mbStart)
         {
@@ -313,20 +329,21 @@ public class DialogActivity extends FragmentActivity {
 //            }
         }
         mbStart = false;
+        if (bsaveData){
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("bitmap", mCurBitmap);
+            intent.putExtra("bundle", bundle);
+            setResult(RESULT_OK, intent);
+        }
+        finish();
     }
 
     public void OnBnClose(View view)
     {
-        CloseDevice();
+        CloseDevice(false);
         mTxtReport.setText("Close device succ!");
         //moveTaskToBack(true);
-        mContext.unregisterReceiver(mUsbReceiver);
-
-        Intent intent = new Intent();
-        intent.putExtra("bundle", 111);
-        setResult(RESULT_OK, intent);
-        finish();
-
     }
 
 }

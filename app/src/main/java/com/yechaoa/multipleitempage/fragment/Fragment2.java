@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -42,6 +43,14 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     private ProgressDialog mSaveProgressDlg;
     private static final int MSG_SAVE_SUCCESS = 1;
     private static final int MSG_SAVE_FAILED = 2;
+    private static final int BITMAP_LEFT_TOP = 101;
+    private static final int BITMAP_LEFT_BOOTOM = 102;
+    private static final int BITMAP_RIGHT_TOP = 103;
+    private static final int BITMAP_RIGHT_BOTTOM = 104;
+    private ImageView mLeftTopPrintView;
+    private ImageView mLeftBottomPrintView;
+    private ImageView mRightTopPrintView;
+    private ImageView mRightBottomPrintView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -49,8 +58,6 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             mDialogHelper = new DialogHelper(this.getActivity(), this);
         }
         return inflater.inflate(R.layout.fragment_fragment2, container, false);
-
-
     }
 
     @Override
@@ -144,6 +151,42 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             }
         });
 
+
+        mLeftTopPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_img);
+        mLeftTopPrintView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_LEFT_TOP);
+            }
+        });
+
+        mLeftBottomPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_img);
+        mLeftBottomPrintView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_LEFT_BOOTOM);
+            }
+        });
+
+        mRightTopPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_top_control).findViewById(R.id.tv_sign_img);
+        mRightTopPrintView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_RIGHT_TOP);
+            }
+        });
+
+        mRightBottomPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_img);
+        mRightBottomPrintView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_RIGHT_BOTTOM);
+            }
+        });
     }
 
     private String findViewByEditTextId(int id){
@@ -171,6 +214,11 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         });
     }
 
+    private void strtFinterActivity(int requestCode){
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), DialogActivity.class);
+        startActivityForResult(intent, requestCode);
+    }
     private void initSaveProgressDlg() {
         mSaveProgressDlg = new ProgressDialog(getContext());
         mSaveProgressDlg.setMessage("正在提交,请稍候...");
@@ -198,8 +246,25 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK ){
+            Bundle bundle = data.getBundleExtra("bundle");
+            Bitmap bitmap = bundle.getParcelable("bitmap");
 
-            YUtils.showToast("result ok");
+            if (bitmap != null) {
+                if (BITMAP_LEFT_TOP == requestCode) {
+                    mLeftTopPrintView.setImageBitmap(bitmap);
+                }else if (BITMAP_LEFT_BOOTOM == requestCode){
+                    mLeftBottomPrintView.setImageBitmap(bitmap);
+                }else if (BITMAP_RIGHT_TOP == requestCode){
+                    mRightTopPrintView.setImageBitmap(bitmap);
+                }else if (BITMAP_RIGHT_BOTTOM == requestCode){
+                    mRightBottomPrintView.setImageBitmap(bitmap);
+                }
+            }
         }
     }
 }
+
+
+//mImageView.setDrawingCacheEnabled(true);
+//        Bitmap bitmap = Bitmap.createBitmap(mImageView.getDrawingCache());
+//        mImageView.setDrawingCacheEnabled(false);

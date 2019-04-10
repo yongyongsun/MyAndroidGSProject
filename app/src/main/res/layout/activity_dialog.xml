@@ -63,6 +63,7 @@
             android:onClick="OnBnClose"
             android:textColor="@color/red"
             android:layout_margin="@dimen/margin"
+            android:padding="@dimen/margin"
             android:background="@drawable/bg_edittext"
             android:textSize="26dp" />
         <TextView
@@ -75,6 +76,7 @@
             android:textColor="@color/red"
             android:layout_margin="@dimen/margin"
             android:background="@drawable/bg_edittext"
+            android:visibility="gone"
             android:textSize="26dp" />
         </LinearLayout>
     </LinearLayout>
