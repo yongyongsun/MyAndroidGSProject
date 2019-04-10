@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yechaoa.multipleitempage.utils.PixAndDpUtil;
+import com.yechaoa.yutils.YUtils;
 import com.zkteco.android.biometric.core.device.ParameterHelper;
 import com.zkteco.android.biometric.core.device.TransportType;
 import com.zkteco.android.biometric.core.utils.LogHelper;
@@ -142,7 +145,7 @@ public class DialogActivity extends FragmentActivity {
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.height = (int) (display.getHeight() * 0.7);
+        params.height = (int) (display.getHeight() * 0.9);
         params.width = (int) (display.getWidth() * 0.7);
         params.alpha = 1.0f;
         getWindow().setAttributes(params);
@@ -158,6 +161,12 @@ public class DialogActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        CloseDevice();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
     }
@@ -170,6 +179,15 @@ public class DialogActivity extends FragmentActivity {
         NIDFPFactory.destroy(mNIDFPSensor);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //return super.onKeyDown(keyCode, event);
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            OnBnClose(null);
+
+        }
+        return true;
+    }
     private class WorkThread extends Thread {
         @Override
         public void run() {
@@ -246,6 +264,8 @@ public class DialogActivity extends FragmentActivity {
 
     public void OnBnOpen(View view)
     {
+//        int dp = PixAndDpUtil.Px2Dp(getApplicationContext(),256);
+//        YUtils.showToast("px = 256 ,change dp = " + dp);
         OpenDeviceAndRequestDevice();
     }
 
@@ -286,11 +306,11 @@ public class DialogActivity extends FragmentActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            try {
-                mNIDFPSensor.close(0);  //关闭设备
-            } catch (NIDFPException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                mNIDFPSensor.close(0);  //关闭设备
+//            } catch (NIDFPException e) {
+//                e.printStackTrace();
+//            }
         }
         mbStart = false;
     }
@@ -299,6 +319,14 @@ public class DialogActivity extends FragmentActivity {
     {
         CloseDevice();
         mTxtReport.setText("Close device succ!");
+        //moveTaskToBack(true);
+        mContext.unregisterReceiver(mUsbReceiver);
+
+        Intent intent = new Intent();
+        intent.putExtra("bundle", 111);
+        setResult(RESULT_OK, intent);
+        finish();
+
     }
 
 }

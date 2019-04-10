@@ -3,12 +3,14 @@ package com.yechaoa.multipleitempage.fragment;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
@@ -94,7 +98,14 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 //                formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv));
 
 
-                startActivity(new Intent(getActivity(), DialogActivity.class));
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), DialogActivity.class);
+                startActivityForResult(intent, 101);
+
+                //startActivity(new Intent(getActivity(), DialogActivity.class));
+
+
+
 //                if (mSaveProgressDlg == null) {
 //                    initSaveProgressDlg();
 //                }
@@ -183,4 +194,12 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK ){
+
+            YUtils.showToast("result ok");
+        }
+    }
 }

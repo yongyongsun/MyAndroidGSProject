@@ -529,6 +529,7 @@
                 android:gravity="center"
                 android:text="提交"
                 android:textColor="@color/red"
+                android:background="@drawable/bg_edittext"
                 android:textSize="26dp" />
 
             <TextView
