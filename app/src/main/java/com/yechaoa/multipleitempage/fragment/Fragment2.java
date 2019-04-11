@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,13 +45,20 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     private ProgressDialog mSaveProgressDlg;
     private static final int MSG_SAVE_SUCCESS = 1;
     private static final int MSG_SAVE_FAILED = 2;
-    private static final int BITMAP_LEFT_TOP = 101;
-    private static final int BITMAP_LEFT_BOOTOM = 102;
-    private static final int BITMAP_RIGHT_TOP = 103;
-    private static final int BITMAP_RIGHT_BOTTOM = 104;
+    private static final int BITMAP_LEFT_TOP1 = 101;
+    private static final int BITMAP_LEFT_TOP2 = 102;
+    private static final int BITMAP_LEFT_BOOTOM1 = 103;
+    private static final int BITMAP_LEFT_BOOTOM2 = 104;
+    private static final int BITMAP_RIGHT_TOP1 = 105;
+    private static final int BITMAP_RIGHT_TOP2 = 106;
+    private static final int BITMAP_RIGHT_BOTTOM1 = 107;
+    private static final int BITMAP_RIGHT_BOTTOM2 = 108;
     private ImageView mLeftTopPrintView;
+    private ImageView mLeftTopPrintView2;
     private ImageView mLeftBottomPrintView;
+    private ImageView mLeftBottomPrintView2;
     private ImageView mRightTopPrintView;
+    private ImageView mRightTopPrintView2;
     private ImageView mRightBottomPrintView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -153,39 +161,81 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         });
 
 
+        TextView tv_left_top_finter = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_finter_text);
+        tv_left_top_finter.setText("经营者(公章)");
         mLeftTopPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_img);
         mLeftTopPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_TOP);
+                strtFinterActivity(BITMAP_LEFT_TOP1);
+            }
+        });
+        TextView tv_left_top_print = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_print_text);
+        tv_left_top_finter.setText("负责任签字");
+        mLeftTopPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_print_img);
+        mLeftTopPrintView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_LEFT_TOP2);
             }
         });
 
+
+        TextView tv_left_bottom_finter = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_finter_text);
+        tv_left_bottom_finter.setText("市场主办单位(公章)");
         mLeftBottomPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_img);
         mLeftBottomPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_BOOTOM);
+                strtFinterActivity(BITMAP_LEFT_BOOTOM1);
             }
         });
-
-        mRightTopPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
-                .findViewById(R.id.sign_right_top_control).findViewById(R.id.tv_sign_img);
-        mRightTopPrintView.setOnClickListener(new View.OnClickListener() {
+        mLeftBottomPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_print_img);
+        mLeftBottomPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_RIGHT_TOP);
+                strtFinterActivity(BITMAP_LEFT_BOOTOM2);
             }
         });
 
+
+        FrameLayout fl_right_top_finter = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_top_control).findViewById(R.id.fl_sign_finter_id);
+        fl_right_top_finter.setVisibility(View.GONE);
+
+        TextView tv_right_top_print = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_top_control).findViewById(R.id.tv_sign_print_text);
+        tv_right_top_print.setText("市场监督管理执法人员签字");
+        mRightTopPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_top_control).findViewById(R.id.tv_sign_print_img);
+        mRightTopPrintView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                strtFinterActivity(BITMAP_RIGHT_TOP2);
+            }
+        });
+
+
+        FrameLayout fl_right_bottom_finter = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.fl_sign_finter_id);
+        fl_right_bottom_finter.setVisibility(View.GONE);
+
+        TextView tv_right_bottom_print = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_print_text);
+        tv_right_bottom_print.setText("备份样品接收记录签字");
         mRightBottomPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
-                .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_img);
+                .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_print_img);
         mRightBottomPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_RIGHT_BOTTOM);
+                strtFinterActivity(BITMAP_RIGHT_BOTTOM2);
             }
         });
     }
@@ -251,13 +301,13 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             Bitmap bitmap = bundle.getParcelable("bitmap");
 
             if (bitmap != null) {
-                if (BITMAP_LEFT_TOP == requestCode) {
+                if (BITMAP_LEFT_TOP1 == requestCode) {
                     mLeftTopPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_LEFT_BOOTOM == requestCode){
+                }else if (BITMAP_LEFT_BOOTOM1 == requestCode){
                     mLeftBottomPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_RIGHT_TOP == requestCode){
+                }else if (BITMAP_RIGHT_TOP1 == requestCode){
                     mRightTopPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_RIGHT_BOTTOM == requestCode){
+                }else if (BITMAP_RIGHT_BOTTOM1 == requestCode){
                     mRightBottomPrintView.setImageBitmap(bitmap);
                 }
             }

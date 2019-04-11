@@ -3,46 +3,91 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/list_item_padding"
-    android:orientation="horizontal">
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/tv_operator_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="签章"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/list_item_padding"
-            android:layout_marginRight="@dimen/list_item_padding"
-            android:layout_marginBottom="30dp"
-            android:textSize="@dimen/sub_item_text_size"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
             android:background="@color/lineGray" />
-        <TextView
-            android:id="@+id/tv_operator_printing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手写签名"
-            android:gravity="center"
-            android:layout_marginTop="30dp"
+        <FrameLayout
+            android:id="@+id/fl_sign_finter_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginLeft="@dimen/list_item_padding"
             android:layout_marginRight="@dimen/list_item_padding"
-            android:textSize="@dimen/sub_item_text_size"/>
+            >
+
+            <ImageView
+                android:id="@+id/tv_sign_img"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/splash"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_sign_finter_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="经营者(公章)"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineGray" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/list_item_padding"
+            android:layout_marginRight="@dimen/list_item_padding"
+            >
+            <ImageView
+                android:id="@+id/tv_sign_print_img"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:background="@drawable/splash"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                />
+
+            <TextView
+                android:id="@+id/tv_sign_print_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="负责人签字"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+        </FrameLayout>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/lineGray" />
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/tv_sign_img"
-        android:layout_width="@dimen/sign_img_width"
-        android:layout_height="@dimen/sign_img_height"
-        android:textSize="20dp"
-        android:text="测试文字"
-        android:src="@drawable/splash"/>
-
-
+    <TextView
+        android:id="@+id/tv_sign_date_times"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/margin"
+        android:text="签字日期2019年4月11日"
+        android:textSize="24dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineGray" />
 </LinearLayout>

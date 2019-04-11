@@ -67,7 +67,7 @@ public class DialogHelper implements DialogInterface.OnCancelListener {
         this.mDialogCancelListener = onCancelListener;
     }
 
-    /**
+    /**W
      * 显示 loading 弹窗,默认不能点击空白处进行取消
      *
      * @param loadingTip 信息提示
