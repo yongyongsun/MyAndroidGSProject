@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/remote_pdf_root"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <EditText
+        android:id="@+id/et_pdfUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://css4.pub/2015/textbook/somatosensory.pdf"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/btn_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="xiazai"/>
+
+    <TextView
+        android:id="@+id/tv_tips_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="正在下载PDF文件，请稍后..."
+        android:textSize="@dimen/sub_item_text_size"
+        />
+
+</LinearLayout>
+

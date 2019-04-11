@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.yechaoa.multipleitempage.DialogActivity;
 import com.yechaoa.multipleitempage.R;
+import com.yechaoa.multipleitempage.RemotePDFActivity;
 import com.yechaoa.multipleitempage.dialog.DialogHelper;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogCancelListener;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogConfirmDataListener;
@@ -105,11 +106,11 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 //                formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv));
 
 
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), DialogActivity.class);
-                startActivityForResult(intent, 101);
+//                Intent intent = new Intent();
+//                intent.setClass(getActivity(), DialogActivity.class);
+//                startActivityForResult(intent, 101);
 
-                //startActivity(new Intent(getActivity(), DialogActivity.class));
+                startActivity(new Intent(getActivity(), RemotePDFActivity.class));
 
 
 

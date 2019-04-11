@@ -31,6 +31,7 @@
             android:name=".DialogActivity"
             android:theme="@style/ActivityDialogStyle"
             android:screenOrientation="landscape"/>
+        <activity android:name=".RemotePDFActivity" android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 
 </manifest>
