@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/tv_sign_img"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/splash"
                 android:scaleType="centerCrop" />
@@ -54,8 +54,8 @@
             >
             <ImageView
                 android:id="@+id/tv_sign_print_img"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:background="@drawable/splash"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"

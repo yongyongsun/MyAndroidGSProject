@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MultipleItemPage.iml" filepath="$PROJECT_DIR$/MultipleItemPage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/signlibrary/signlibrary.iml" filepath="$PROJECT_DIR$/signlibrary/signlibrary.iml" />
     </modules>
   </component>
 </project>

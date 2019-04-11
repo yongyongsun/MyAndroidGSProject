@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.king.signature.PaintActivity;
+import android.king.signature.config.PenConfig;
+import android.king.signature.util.BitmapUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -60,6 +63,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     private ImageView mRightTopPrintView;
     private ImageView mRightTopPrintView2;
     private ImageView mRightBottomPrintView;
+    private ImageView mRightBottomPrintView2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -118,7 +122,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 //                intent.setClass(getActivity(), DialogActivity.class);
 //                startActivityForResult(intent, 101);
 
-                startActivity(new Intent(getActivity(), RemotePDFActivity.class));
+                startActivity(new Intent(getActivity(), PaintActivity.class));
 
 
 
@@ -169,18 +173,18 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         mLeftTopPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_TOP1);
+                startFinterActivity(BITMAP_LEFT_TOP1);
             }
         });
         TextView tv_left_top_print = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_print_text);
-        tv_left_top_finter.setText("负责任签字");
+        tv_left_top_print.setText("负责任签字");
         mLeftTopPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_print_img);
         mLeftTopPrintView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_TOP2);
+                startPaintActivity(BITMAP_LEFT_TOP2);
             }
         });
 
@@ -193,15 +197,15 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         mLeftBottomPrintView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_BOOTOM1);
+                startFinterActivity(BITMAP_LEFT_BOOTOM1);
             }
         });
         mLeftBottomPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_print_img);
-        mLeftBottomPrintView.setOnClickListener(new View.OnClickListener() {
+        mLeftBottomPrintView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_LEFT_BOOTOM2);
+                startPaintActivity(BITMAP_LEFT_BOOTOM2);
             }
         });
 
@@ -218,7 +222,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         mRightTopPrintView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_RIGHT_TOP2);
+                startPaintActivity(BITMAP_RIGHT_TOP2);
             }
         });
 
@@ -230,12 +234,12 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         TextView tv_right_bottom_print = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_print_text);
         tv_right_bottom_print.setText("备份样品接收记录签字");
-        mRightBottomPrintView = getActivity().findViewById(R.id.ly_sign_bottom_view)
+        mRightBottomPrintView2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
                 .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_print_img);
-        mRightBottomPrintView.setOnClickListener(new View.OnClickListener() {
+        mRightBottomPrintView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                strtFinterActivity(BITMAP_RIGHT_BOTTOM2);
+                startPaintActivity(BITMAP_RIGHT_BOTTOM2);
             }
         });
     }
@@ -265,10 +269,23 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         });
     }
 
-    private void strtFinterActivity(int requestCode){
+    private void startFinterActivity(int requestCode){
         Intent intent = new Intent();
         intent.setClass(getActivity(), DialogActivity.class);
         startActivityForResult(intent, requestCode);
+    }
+
+    private void  startPaintActivity(int requestCode){
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), PaintActivity.class);
+
+//        intent.putExtra("background", Color.WHITE);//画布背景色，默认透明，也是最终生成图片的背景色
+//        intent.putExtra("width", 800); //画布宽度，最大值3000，默认占满布局
+//        intent.putExtra("height", 800);//画布高度，最大值3000，默认占满布局
+        intent.putExtra("crop", true);   //最终的图片是否只截取文字区域
+        intent.putExtra("format", PenConfig.FORMAT_PNG); //图片格式
+        startActivityForResult(intent, requestCode);
+
     }
     private void initSaveProgressDlg() {
         mSaveProgressDlg = new ProgressDialog(getContext());
@@ -297,25 +314,36 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK ){
-            Bundle bundle = data.getBundleExtra("bundle");
-            Bitmap bitmap = bundle.getParcelable("bitmap");
+            if (BITMAP_LEFT_TOP1 == requestCode) {
+                Bundle bundle = data.getBundleExtra("bundle");
+                Bitmap bitmap = bundle.getParcelable("bitmap");
+                mLeftTopPrintView.setImageBitmap(bitmap);
 
-            if (bitmap != null) {
-                if (BITMAP_LEFT_TOP1 == requestCode) {
-                    mLeftTopPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_LEFT_BOOTOM1 == requestCode){
-                    mLeftBottomPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_RIGHT_TOP1 == requestCode){
-                    mRightTopPrintView.setImageBitmap(bitmap);
-                }else if (BITMAP_RIGHT_BOTTOM1 == requestCode){
-                    mRightBottomPrintView.setImageBitmap(bitmap);
-                }
+            }if (BITMAP_LEFT_TOP2 == requestCode) {
+                Bitmap bit = BitmapUtil.getBundlerBitmap();
+                Bitmap bit11 = BitmapUtil.zoomImg(bit,mLeftTopPrintView2.getWidth());
+                mLeftTopPrintView2.setImageBitmap(bit11);
+
+            }else if (BITMAP_LEFT_BOOTOM1 == requestCode){
+                Bundle bundle = data.getBundleExtra("bundle");
+                Bitmap bitmap = bundle.getParcelable("bitmap");
+                mLeftBottomPrintView.setImageBitmap(bitmap);
+            }else if (BITMAP_LEFT_BOOTOM2 == requestCode){
+                Bitmap bit = BitmapUtil.getBundlerBitmap();
+                mLeftBottomPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mLeftBottomPrintView2.getWidth()));
+            }else if (BITMAP_RIGHT_TOP2 == requestCode){
+                Bitmap bit = BitmapUtil.getBundlerBitmap();
+                mRightTopPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mRightTopPrintView2.getWidth()));
+            }else if (BITMAP_RIGHT_BOTTOM2 == requestCode){
+                Bitmap bit = BitmapUtil.getBundlerBitmap();
+                mRightBottomPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mRightBottomPrintView2.getWidth()));
             }
+
         }
     }
 }
 
-
+//获取图片
 //mImageView.setDrawingCacheEnabled(true);
 //        Bitmap bitmap = Bitmap.createBitmap(mImageView.getDrawingCache());
 //        mImageView.setDrawingCacheEnabled(false);

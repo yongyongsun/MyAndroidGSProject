@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation files('libs/zc_penutil_v6.jar')
     implementation project(":library")
+    implementation project(':signlibrary')
 }
