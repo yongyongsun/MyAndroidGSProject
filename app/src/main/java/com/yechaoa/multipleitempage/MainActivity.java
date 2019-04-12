@@ -1,6 +1,7 @@
 package com.yechaoa.multipleitempage;
 
 import android.content.Intent;
+import android.graphics.YuvImage;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +17,8 @@ import com.yechaoa.multipleitempage.fragment.Fragment1;
 import com.yechaoa.multipleitempage.fragment.Fragment2;
 import com.yechaoa.multipleitempage.fragment.Fragment3;
 import com.yechaoa.multipleitempage.fragment.Fragment4;
+import com.yechaoa.multipleitempage.fragment.LoginUserInfo;
+import com.yechaoa.yutils.YUtils;
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG="MainActivity";
@@ -39,9 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         mNavigation = findViewById(R.id.navigation);
         mViewPager = findViewById(R.id.viewPager);
-        mViewPager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager()));
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //数据部分
+        LoginUserInfo userinfo = (LoginUserInfo)getIntent().getSerializableExtra("userinfo");
+        //登录成功时候，从loginActivity获取收据，同时刷新fragment4数据。
+        Fragment4 frag4 = (Fragment4)adapter.getItem(3);
+        frag4.getLoginData(userinfo);
+
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -58,11 +69,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onPageScrollStateChanged(int state) {
 
-//            //登录成功时候，从loginActivity获取收据，同时刷新fragment4数据。
-//            SimpleFragmentPagerAdapter adpter = (SimpleFragmentPagerAdapter)mViewPager.getAdapter();
-//            Fragment4 fragmen = (Fragment4)adpter.getItem(3);
-//            fragmen.getLoginData("32323232323323233");
-
+//
         }
     };
 

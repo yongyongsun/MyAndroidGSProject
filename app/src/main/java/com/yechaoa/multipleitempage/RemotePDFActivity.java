@@ -45,7 +45,8 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     EditText etPdfUrl;
     Button btnDownload;
     PDFPagerAdapter adapter;
-    TextView mTvTipsInfo;
+    private TextView mTvTipsInfo;
+    private String mPdfUrl;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
         btnDownload = (Button) findViewById(R.id.btn_download);
         mTvTipsInfo = findViewById(R.id.tv_tips_info);
 
+        mPdfUrl = getIntent().getStringExtra("pdfurl");
         //setDownloadButtonListener();
         new Thread(new Runnable() {
             @Override
@@ -69,7 +71,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), getUrlFromEditText(), RemotePDFActivity.this);
+                        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl, RemotePDFActivity.this);
                         Log.i(TAG, "running: ");
                     }
                 });

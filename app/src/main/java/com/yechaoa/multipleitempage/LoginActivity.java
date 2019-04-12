@@ -30,18 +30,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.apache.http.Header;
+
+import com.yechaoa.multipleitempage.fragment.LoginUserInfo;
+import com.yechaoa.yutils.SpUtil;
 import com.yechaoa.yutils.YUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -73,6 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private LoginUserInfo mUserInfoObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +113,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        //获取用户登录状态
+        String strname = SpUtil.getString("username");
+        String strpw = SpUtil.getString("password");
+        if (!strname.isEmpty() && !strpw.isEmpty())
+        {
+            mEmailView.setText(strname);
+            mPasswordView.setText(strpw);
+        }
     }
 
     private void populateAutoComplete() {
@@ -321,18 +338,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             try {
-                OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
-                Request request = new Request.Builder()
-                        .url("http://www.baidu.com")//请求接口。如果需要传参拼接到接口后面。
-                        .build();//创建Request 对象
-                Response response = null;
-                response = client.newCall(request).execute();//得到Response
-                if (response.isSuccessful()) {
-//                    YUtils.showToast("response.code()=="+response.code());
-//                    YUtils.showToast("response.message()=="+response.message());
-//                    YUtils.showToast("res=="+response.body().string());
+                App appState = (App)getApplicationContext();
+                String URL = appState.getURLForLogin();
 
-                    YUtils.showToast("screenwidth:" + YUtils.getScreenWidth() + " screenheight :" + YUtils.getScreenHeight());
+                MediaType MEDIA_TYPE_JSON= MediaType.parse("application/json; charset=utf-8");
+                Gson g = new Gson();
+                Map<String,Object> map = new HashMap<String,Object>();
+                map.put("username",mEmail);
+                map.put("password",mPassword);
+                String jsonStr = g.toJson(map);
+                RequestBody requestBody= RequestBody.create(MEDIA_TYPE_JSON,jsonStr);
+                OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
+                Request requestPost=new Request.Builder().url(URL).post(requestBody).build();
+                Response response = null;
+                response = client.newCall(requestPost).execute();//得到Response
+                if (response.isSuccessful()) {
+                    //YUtils.showToast("screenwidth:" + YUtils.getScreenWidth() + " screenheight :" + YUtils.getScreenHeight());
+                    mUserInfoObject = g.fromJson(response.body().string(), LoginUserInfo.class);//把JSON字符串转为对象
+                    Log.i("LoginActivity userinfo:", mUserInfoObject.toString());
+                    return true;
+                }else {
+                    Log.e("LoginActivity userinfo:", response.body().string());
+                    return false;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -347,7 +374,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userinfo", mUserInfoObject);
+                intent.putExtras(bundle);
                 startActivity(intent);
+                //保存用户登录状态
+                SpUtil.setString("username",mEmail);
+                SpUtil.setString("password",mPassword);
+                SpUtil.setString("userId",mUserInfoObject.getUserId());
+                SpUtil.setString("token",mUserInfoObject.getToken());
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

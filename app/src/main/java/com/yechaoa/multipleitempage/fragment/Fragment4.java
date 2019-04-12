@@ -40,6 +40,8 @@ public class Fragment4 extends Fragment {
 
     private MultipleItemQuickAdapter multipleItemQuickAdapter;
 
+    private LoginUserInfo mUserInfo;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_fragment4, container, false);
@@ -90,7 +92,7 @@ public class Fragment4 extends Fragment {
         itemDataList = new ArrayList<>();
 
         multipleItem = new MultipleItem(MultipleItem.TYPE_MY_SHOW, 5);
-        multipleItem.mStrPhone = "13938845889";
+        multipleItem.mStrPhone = mUserInfo.getMobile();
         multipleItem.mStrRole = "角色";
         multipleItem.mStrClass = "工程部";
         multipleItem.mStrStation = "工程师";
@@ -150,10 +152,10 @@ public class Fragment4 extends Fragment {
         myHeaderImage.setOnClickListener(listener);
 
         TextView myHeaderName = (TextView) headerView.findViewById(R.id.my_header_name);
-        myHeaderName.setText("名字");
+        myHeaderName.setText(mUserInfo.getName());
 
         TextView myHeaderMobile = (TextView) headerView.findViewById(R.id.my_header_mobile);
-        myHeaderMobile.setText("手机号");
+        myHeaderMobile.setText("生日:" +mUserInfo.getBirthday());
 
         ImageView myHeaderSettings = (ImageView) headerView.findViewById(R.id.my_header_settings);
         myHeaderSettings.setOnClickListener(listener);
@@ -199,7 +201,8 @@ public class Fragment4 extends Fragment {
 
     }
 
-    public void getLoginData(String str){
-        YUtils.showToast(str);
+    public void getLoginData(LoginUserInfo userinfo){
+        mUserInfo = userinfo;
     }
+
 }

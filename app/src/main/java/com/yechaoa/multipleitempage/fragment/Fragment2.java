@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.king.signature.PaintActivity;
 import android.king.signature.config.PenConfig;
 import android.king.signature.util.BitmapUtil;
@@ -13,6 +15,8 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,24 +24,33 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
 import com.google.gson.Gson;
+import com.yechaoa.multipleitempage.App;
 import com.yechaoa.multipleitempage.DialogActivity;
 import com.yechaoa.multipleitempage.R;
 import com.yechaoa.multipleitempage.RemotePDFActivity;
 import com.yechaoa.multipleitempage.dialog.DialogHelper;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogCancelListener;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogConfirmDataListener;
+import com.yechaoa.yutils.ParseUtil;
+import com.yechaoa.yutils.SpUtil;
 import com.yechaoa.yutils.YUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
@@ -81,6 +94,14 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             @Override
             public void onClick(View view) {
                 FromBeanInfo formInfo = new FromBeanInfo();
+                formInfo.setUserId(SpUtil.getString("userId"));
+                formInfo.setToken(SpUtil.getString("token"));
+
+                EditText et = getActivity().findViewById(R.id.layout_form_header).findViewById(R.id.sub_iv_head_year).findViewById(R.id.et_input);
+                formInfo.setYear(et.getText().toString());
+                EditText et1 = getActivity().findViewById(R.id.layout_form_header).findViewById(R.id.sub_iv_head_class).findViewById(R.id.et_input);
+                formInfo.setGoodsClass(et1.getText().toString());
+
                 formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv_sample_name));
                 formInfo.setTrademark(findViewByEditTextId(R.id.sub_iv_mark));
                 formInfo.setGrade(findViewByEditTextId(R.id.sub_iv_level));
@@ -105,60 +126,101 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 formInfo.setOperatorContacts(findViewByEditTextId(R.id.sub_iv_operator_contacts));
                 formInfo.setOperatorMobile(findViewByEditTextId(R.id.sub_iv_operator_mobile_phone));
                 formInfo.setOperatorEmail(findViewByEditTextId(R.id.sub_iv_operator_mail));
-                //formInfo.setOperatorLocation(findViewByEditTextId(R.id.sub_iv));radiobutton
-                //formInfo.setCheckPlace(findViewByEditTextId(R.id.sub_iv));radionbutton
+                //radiobutton part
+                RadioGroup group1 = getActivity().findViewById(R.id.rd_group_operator_location);
+                String strRadio1 = getActivity().findViewById(group1.getCheckedRadioButtonId()).getTag().toString();
+                formInfo.setOperatorLocation(strRadio1);
+                RadioGroup group2 = getActivity().findViewById(R.id.rd_group_check_place);
+                String strRadio2 = getActivity().findViewById(group2.getCheckedRadioButtonId()).getTag().toString();
+                formInfo.setCheckPlace(strRadio2);
+
                 formInfo.setProducerSupplier(findViewByEditTextId(R.id.sub_iv_product_supplier));
                 formInfo.setProducerSupplierAddress(findViewByEditTextId(R.id.sub_iv_product_supplier_addi));
                 formInfo.setProducerSupplierContacts(findViewByEditTextId(R.id.sub_iv_product_supplier_contacts));
                 formInfo.setProducerSupplierPhone(findViewByEditTextId(R.id.sub_iv_product_supplier_phone));
                 formInfo.setProducerSupplierFax(findViewByEditTextId(R.id.sub_iv_product_supplier_fax));
-//                formInfo.setNoticeYear(findViewByEditTextId(R.id.sub_iv));
-//                formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv));
-//                formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv));
-//                formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv));
+                formInfo.setNoticeYear(findViewByEditTextId(R.id.iv_notice_number));
+                formInfo.setNoticeWorkNo(findViewByEditTextId(R.id.iv_check_number));
 
+                ImageView iv_left_top1 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_img);
+                formInfo.setOperatorOfficialSeals(getViewBitmapBase64(iv_left_top1));
 
-//                Intent intent = new Intent();
-//                intent.setClass(getActivity(), DialogActivity.class);
-//                startActivityForResult(intent, 101);
+                ImageView iv_left_top2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_left_top_control).findViewById(R.id.tv_sign_print_img);
+                formInfo.setOperatorSign(getViewBitmapBase64(iv_left_top2));
 
-                startActivity(new Intent(getActivity(), PaintActivity.class));
+                //签章日期
+                formInfo.setOperatorSignDate(getCurSysDate());
 
+                ImageView iv_left_bottom1 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_img);
+                formInfo.setSponsorUnitOS(getViewBitmapBase64(iv_left_bottom1));
 
+                ImageView iv_left_bottom2 = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_left_bottom_control).findViewById(R.id.tv_sign_print_img);
+                formInfo.setSponsorUnitSign(getViewBitmapBase64(iv_left_bottom2));
+                //市场主办签章日期
+                formInfo.setSponsorUnitSignDate(getCurSysDate());
 
-//                if (mSaveProgressDlg == null) {
-//                    initSaveProgressDlg();
-//                }
-//                mSaveProgressDlg.show();
-//
-//
-//                OkHttpClient client = new OkHttpClient();
-//                // 聚合数据
-//                String apiUrl = "www.bing.com";
-//                Request request = new Request.Builder().url(apiUrl).build();
-//                client.newCall(request).enqueue(new Callback() {
-//                    @Override
-//                    public void onFailure(Call call, IOException e) {
-//                        mSaveProgressDlg.dismiss();
-//                        mHandler.obtainMessage(MSG_SAVE_FAILED).sendToTarget();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(Call call, Response response) throws IOException {
-//                        mSaveProgressDlg.dismiss();
-//                        String result = response.body().string();
-//                        if (!TextUtils.isEmpty(result)) {
-//                            Gson gson = new Gson();
-//                            EntityInfo entityInfo = gson.fromJson(result, EntityInfo.class);
-//
-//                        }
-//                    }
-//                });
+                //市场监督管理执法人员部分
+                ImageView iv_right_top = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_right_top_control).findViewById(R.id.tv_sign_print_img);
+                formInfo.setLeoSign(getViewBitmapBase64(iv_right_top));
 
+                formInfo.setLeoSignDate(getCurSysDate());
 
+                //备份样品接收记录
+                ImageView iv_right_bottom = getActivity().findViewById(R.id.ly_sign_bottom_view)
+                        .findViewById(R.id.sign_right_bottom_control).findViewById(R.id.tv_sign_print_img);
+                formInfo.setBsReceiverSign(getViewBitmapBase64(iv_right_bottom));
 
-//                YUtils.showToast(ss);
-//                showConfirmDialog();
+                formInfo.setBsReceiverSignDate(getCurSysDate());
+
+                //Log.i("Fragment2, formInfo",formInfo.toString());
+
+                Gson g = new Gson();
+                String strJson = g.toJson(formInfo);
+                //Log.i("Fragment2, strJson",strJson);
+                MediaType MEDIA_TYPE_JSON= MediaType.parse("application/json; charset=utf-8");
+                OkHttpClient client = new OkHttpClient();
+                App appState = (App)getContext().getApplicationContext();
+                String apiUrl = appState.getURLForWeekSheet();
+                RequestBody requestBody= RequestBody.create(MEDIA_TYPE_JSON,strJson);
+                Request request = new Request.Builder().url(apiUrl).post(requestBody).build();
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        mSaveProgressDlg.dismiss();
+                        mHandler.obtainMessage(MSG_SAVE_FAILED).sendToTarget();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        mSaveProgressDlg.dismiss();
+                        String result = response.body().string();
+                        if (response.isSuccessful()) {
+                            Gson g = new Gson();
+                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
+                            String strUrlpdf = info.getWorkSheetPDFurl();
+                            Log.i("fragment2 pdfurl = ",strUrlpdf);
+                            Intent intent = new Intent(getActivity(),RemotePDFActivity.class);
+                            intent.putExtra("pdfurl",strUrlpdf);
+                            startActivity(intent);
+
+                        }else {
+                            Gson g = new Gson();
+                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
+                            YUtils.showToast("请求失败，错误信息:" + info.getCode());
+
+                        }
+                    }
+                });
+
+                if (mSaveProgressDlg == null) {
+                    initSaveProgressDlg();
+                }
+                mSaveProgressDlg.show();
 
 
             }
@@ -279,7 +341,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         Intent intent = new Intent();
         intent.setClass(getActivity(), PaintActivity.class);
 
-//        intent.putExtra("background", Color.WHITE);//画布背景色，默认透明，也是最终生成图片的背景色
+        intent.putExtra("background", Color.WHITE);//画布背景色，默认透明，也是最终生成图片的背景色
 //        intent.putExtra("width", 800); //画布宽度，最大值3000，默认占满布局
 //        intent.putExtra("height", 800);//画布高度，最大值3000，默认占满布局
         intent.putExtra("crop", true);   //最终的图片是否只截取文字区域
@@ -317,33 +379,74 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             if (BITMAP_LEFT_TOP1 == requestCode) {
                 Bundle bundle = data.getBundleExtra("bundle");
                 Bitmap bitmap = bundle.getParcelable("bitmap");
-                mLeftTopPrintView.setImageBitmap(bitmap);
+                mLeftTopPrintView.setBackground(new BitmapDrawable(bitmap));
 
             }if (BITMAP_LEFT_TOP2 == requestCode) {
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
                 Bitmap bit11 = BitmapUtil.zoomImg(bit,mLeftTopPrintView2.getWidth());
-                mLeftTopPrintView2.setImageBitmap(bit11);
+                mLeftTopPrintView2.setBackground(new BitmapDrawable(bit11));
 
             }else if (BITMAP_LEFT_BOOTOM1 == requestCode){
                 Bundle bundle = data.getBundleExtra("bundle");
                 Bitmap bitmap = bundle.getParcelable("bitmap");
-                mLeftBottomPrintView.setImageBitmap(bitmap);
+                mLeftBottomPrintView.setBackground(new BitmapDrawable(bitmap));
             }else if (BITMAP_LEFT_BOOTOM2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
-                mLeftBottomPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mLeftBottomPrintView2.getWidth()));
+                mLeftBottomPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mLeftBottomPrintView2.getWidth())));
             }else if (BITMAP_RIGHT_TOP2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
-                mRightTopPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mRightTopPrintView2.getWidth()));
+                mRightTopPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mRightTopPrintView2.getWidth())));
             }else if (BITMAP_RIGHT_BOTTOM2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
-                mRightBottomPrintView2.setImageBitmap(BitmapUtil.zoomImg(bit,mRightBottomPrintView2.getWidth()));
+                mRightBottomPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mRightBottomPrintView2.getWidth())));
             }
 
         }
     }
-}
 
-//获取图片
-//mImageView.setDrawingCacheEnabled(true);
-//        Bitmap bitmap = Bitmap.createBitmap(mImageView.getDrawingCache());
-//        mImageView.setDrawingCacheEnabled(false);
+    /*
+    获取当前view的bitmap
+     */
+    private String getViewBitmapBase64(View view){
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+        String strBase64 = Base64.encodeToString(Bitmap2Bytes(bitmap), Base64.DEFAULT);
+        //strBase64 = strBase64.replaceAll("[\\s*\t\n\r]", "");
+        return strBase64;
+    }
+    private byte[] Bitmap2Bytes(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    private String getCurSysDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
+    class FormSheetResponseInfo{
+        private  String success;
+        private String code;
+        private String message;
+        private  String workSheetPDFurl;
+
+        public String getSuccess() {
+            return success;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public String getWorkSheetPDFurl() {
+            return workSheetPDFurl;
+        }
+    }
+}
