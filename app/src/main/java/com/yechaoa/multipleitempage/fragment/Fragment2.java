@@ -21,10 +21,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -36,6 +38,7 @@ import com.yechaoa.multipleitempage.RemotePDFActivity;
 import com.yechaoa.multipleitempage.dialog.DialogHelper;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogCancelListener;
 import com.yechaoa.multipleitempage.dialog.inf.OnDialogConfirmDataListener;
+import com.yechaoa.multipleitempage.utils.DateSelectUtil;
 import com.yechaoa.yutils.ParseUtil;
 import com.yechaoa.yutils.SpUtil;
 import com.yechaoa.yutils.YUtils;
@@ -43,7 +46,9 @@ import com.yechaoa.yutils.YUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -77,6 +82,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     private ImageView mRightTopPrintView2;
     private ImageView mRightBottomPrintView;
     private ImageView mRightBottomPrintView2;
+    private  Spinner sp_head_class;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -89,6 +95,39 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
     @Override
     public void onStart() {
         super.onStart();
+
+        //产商品质量抽查类型
+        sp_head_class = getActivity().findViewById(R.id.layout_form_header).findViewById(R.id.spinner_head_class);
+        //数据
+        List<String> data_list = new ArrayList<String>();
+        data_list.add("服装、鞋帽");
+        data_list.add("布料、毛线");
+        data_list.add("家具用品");
+        data_list.add("儿童用品");
+        data_list.add("家用电器");
+        data_list.add("计算机产品");
+        data_list.add("通讯产品");
+        data_list.add("装修建材");
+        data_list.add("照摄像产品");
+        data_list.add("卫生用品");
+        data_list.add("出版物");
+        data_list.add("文化、运动用品");
+        data_list.add("宠物及宠物用品");
+        data_list.add("首饰");
+        data_list.add("五金交电");
+        data_list.add("交通工具");
+        data_list.add("燃料");
+        data_list.add("殡葬用品");
+        data_list.add("农资用品");
+        data_list.add("成品油");
+        data_list.add("其他商品");
+        //适配器
+        ArrayAdapter<String> arr_adapter= new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, data_list);
+        //设置样式
+        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //加载适配器
+        sp_head_class.setAdapter(arr_adapter);
+
         TextView tv_submit_view = getActivity().findViewById(R.id.tv_submit);
         tv_submit_view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +138,8 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
                 EditText et = getActivity().findViewById(R.id.layout_form_header).findViewById(R.id.sub_iv_head_year).findViewById(R.id.et_input);
                 formInfo.setYear(et.getText().toString());
-                EditText et1 = getActivity().findViewById(R.id.layout_form_header).findViewById(R.id.sub_iv_head_class).findViewById(R.id.et_input);
-                formInfo.setGoodsClass(et1.getText().toString());
+                String  strSpanter = sp_head_class.getSelectedItem().toString();
+                formInfo.setGoodsClass(strSpanter);
 
                 formInfo.setSampleName(findViewByEditTextId(R.id.sub_iv_sample_name));
                 formInfo.setTrademark(findViewByEditTextId(R.id.sub_iv_mark));
@@ -179,48 +218,56 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
                 //Log.i("Fragment2, formInfo",formInfo.toString());
 
-                Gson g = new Gson();
-                String strJson = g.toJson(formInfo);
-                //Log.i("Fragment2, strJson",strJson);
-                MediaType MEDIA_TYPE_JSON= MediaType.parse("application/json; charset=utf-8");
-                OkHttpClient client = new OkHttpClient();
-                App appState = (App)getContext().getApplicationContext();
-                String apiUrl = appState.getURLForWeekSheet();
-                RequestBody requestBody= RequestBody.create(MEDIA_TYPE_JSON,strJson);
-                Request request = new Request.Builder().url(apiUrl).post(requestBody).build();
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        mSaveProgressDlg.dismiss();
-                        mHandler.obtainMessage(MSG_SAVE_FAILED).sendToTarget();
-                    }
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        mSaveProgressDlg.dismiss();
-                        String result = response.body().string();
-                        if (response.isSuccessful()) {
-                            Gson g = new Gson();
-                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
-                            String strUrlpdf = info.getWorkSheetPDFurl();
-                            Log.i("fragment2 pdfurl = ",strUrlpdf);
-                            Intent intent = new Intent(getActivity(),RemotePDFActivity.class);
-                            intent.putExtra("pdfurl",strUrlpdf);
-                            startActivity(intent);
 
-                        }else {
-                            Gson g = new Gson();
-                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
-                            YUtils.showToast("请求失败，错误信息:" + info.getCode());
+                showYearMonthDayPicker();
 
-                        }
-                    }
-                });
 
-                if (mSaveProgressDlg == null) {
-                    initSaveProgressDlg();
-                }
-                mSaveProgressDlg.show();
+
+//                Gson g = new Gson();
+//                String strJson = g.toJson(formInfo);
+//                //Log.i("Fragment2, strJson",strJson);
+//                MediaType MEDIA_TYPE_JSON= MediaType.parse("application/json; charset=utf-8");
+//                OkHttpClient client = new OkHttpClient();
+//                App appState = (App)getContext().getApplicationContext();
+//                String apiUrl = appState.getURLForWeekSheet();
+//                RequestBody requestBody= RequestBody.create(MEDIA_TYPE_JSON,strJson);
+//                Request request = new Request.Builder().url(apiUrl).post(requestBody).build();
+//                client.newCall(request).enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(Call call, IOException e) {
+//                        mSaveProgressDlg.dismiss();
+//                        mHandler.obtainMessage(MSG_SAVE_FAILED).sendToTarget();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Call call, Response response) throws IOException {
+//                        mSaveProgressDlg.dismiss();
+//                        String result = response.body().string();
+//                        if (response.isSuccessful()) {
+//                            Gson g = new Gson();
+//                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
+//                            String strUrlpdf = info.getWorkSheetPDFurl();
+//                            Log.i("fragment2 pdfurl = ",strUrlpdf);
+//                            Intent intent = new Intent(getActivity(),RemotePDFActivity.class);
+//                            intent.putExtra("pdfurl",strUrlpdf);
+//                            startActivity(intent);
+//
+//                        }else {
+//                            Gson g = new Gson();
+//                            FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
+//                            YUtils.showToast("请求失败，错误信息:" + info.getCode());
+//
+//                        }
+//                    }
+//                });
+//
+//                if (mSaveProgressDlg == null) {
+//                    initSaveProgressDlg();
+//                }
+//                mSaveProgressDlg.show();
+
+
 
 
             }
@@ -448,5 +495,23 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         public String getWorkSheetPDFurl() {
             return workSheetPDFurl;
         }
+    }
+
+    /**
+     * 年月日选择
+     */
+    private void showYearMonthDayPicker() {
+        DateSelectUtil.showDatePickerDialog(getContext(), android.app.AlertDialog.THEME_HOLO_LIGHT, "请选择年月日", 2019, 1, 1, new DateSelectUtil.OnDatePickerListener(){
+
+            @Override
+            public void onConfirm(int year, int month, int dayOfMonth) {
+                YUtils.showToast(year + "-" + month + "-" + dayOfMonth);
+            }
+
+            @Override
+            public void onCancel() {
+                YUtils.showToast("cancle");
+            }
+        });
     }
 }

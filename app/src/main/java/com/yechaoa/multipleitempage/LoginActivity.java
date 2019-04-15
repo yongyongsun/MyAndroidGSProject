@@ -356,38 +356,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //YUtils.showToast("screenwidth:" + YUtils.getScreenWidth() + " screenheight :" + YUtils.getScreenHeight());
                     mUserInfoObject = g.fromJson(response.body().string(), LoginUserInfo.class);//把JSON字符串转为对象
                     Log.i("LoginActivity userinfo:", mUserInfoObject.toString());
+                    //清除和保存用户登录状态
+                    SpUtil.removeAll();
+                    SpUtil.setString("username",mEmail);
+                    SpUtil.setString("password",mPassword);
+                    SpUtil.setString("userId",mUserInfoObject.getUserId());
+                    SpUtil.setString("token",mUserInfoObject.getToken());
                     return true;
                 }else {
                     Log.e("LoginActivity userinfo:", response.body().string());
                     return false;
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            return true;
+            return false;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
-
             if (success) {
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("userinfo", mUserInfoObject);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                //保存用户登录状态
-                SpUtil.setString("username",mEmail);
-                SpUtil.setString("password",mPassword);
-                SpUtil.setString("userId",mUserInfoObject.getUserId());
-                SpUtil.setString("token",mUserInfoObject.getToken());
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }
+            showProgress(false);
         }
 
         @Override

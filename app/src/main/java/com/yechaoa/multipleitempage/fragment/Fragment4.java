@@ -72,19 +72,19 @@ public class Fragment4 extends Fragment {
                 android.R.color.holo_orange_light);
 
         //暂时不处理刷新 by syy
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        multipleItemQuickAdapter.notifyDataSetChanged();
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        YUtils.showToast("刷新完成");
-                    }
-                }, 2000);
-            }
-        });
+//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        multipleItemQuickAdapter.notifyDataSetChanged();
+//                        mSwipeRefreshLayout.setRefreshing(false);
+//                        YUtils.showToast("刷新完成");
+//                    }
+//                }, 2000);
+//            }
+//        });
     }
 
 

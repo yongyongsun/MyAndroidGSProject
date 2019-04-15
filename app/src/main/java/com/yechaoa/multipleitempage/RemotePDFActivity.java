@@ -60,30 +60,39 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
 
         mPdfUrl = getIntent().getStringExtra("pdfurl");
         //setDownloadButtonListener();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep( 100 );
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl, RemotePDFActivity.this);
-                        Log.i(TAG, "running: ");
-                    }
-                });
-
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep( 100 );
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl, RemotePDFActivity.this);
+//                        Log.i(TAG, "running: ");
+//                    }
+//                });
+//
+//            }
+//        }).start();
     }
 
     @Override
     protected void onResume() {
         Log.i(TAG, "onResume: ");
         super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i(TAG, "onStart: ");
+        super.onStart();
+        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
+                RemotePDFActivity.this);
+
     }
 
     @Override

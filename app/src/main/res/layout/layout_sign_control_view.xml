@@ -26,7 +26,7 @@
                 android:layout_width="350dp"
                 android:layout_height="350dp"
                 android:adjustViewBounds="true"
-                android:background="@drawable/splash"
+                android:background="@drawable/sign_background"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:id="@+id/tv_sign_print_img"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
-                android:background="@drawable/splash"
+                android:background="@drawable/sign_background"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 />
