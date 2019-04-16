@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 
 public class Splash extends AppCompatActivity {

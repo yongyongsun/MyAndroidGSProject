@@ -11,7 +11,7 @@ import android.view.ViewConfiguration;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 /**
  * 自定义View继承SwipeRefreshLayout，添加上拉加载更多的布局属性

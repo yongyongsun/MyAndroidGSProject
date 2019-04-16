@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.zc_penutil_v6.Zc_Penutil;
 import com.example.zc_penutil_v6.Zc_Penutil_Listen;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 public class PenPrintActivity extends AppCompatActivity {
     private final static String TAG = "PenPrintActivity";

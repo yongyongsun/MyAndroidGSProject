@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hnca.gongshangcheck.PenPrintActivity;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 import static android.app.Activity.RESULT_OK;
 

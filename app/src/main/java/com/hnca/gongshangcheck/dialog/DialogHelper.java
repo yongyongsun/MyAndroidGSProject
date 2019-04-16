@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogCancelListener;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogConfirmDataListener;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogConfirmListener;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 /**
  * 弹窗帮助类

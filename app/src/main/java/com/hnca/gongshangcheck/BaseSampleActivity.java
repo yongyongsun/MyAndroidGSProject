@@ -22,7 +22,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 public class BaseSampleActivity extends AppCompatActivity {
 

@@ -15,7 +15,7 @@ import com.hnca.gongshangcheck.fragment.Fragment2;
 import com.hnca.gongshangcheck.fragment.Fragment3;
 import com.hnca.gongshangcheck.fragment.Fragment4;
 import com.hnca.gongshangcheck.fragment.LoginUserInfo;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 public class MainActivity extends AppCompatActivity {
     private final static String TAG="MainActivity";

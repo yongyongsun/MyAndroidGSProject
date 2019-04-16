@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yechaoa.gongshangcheck">
+    package="com.hnca.gongshangcheck">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.App"
+        android:name="com.hnca.gongshangcheck.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.PenPrintActivity"
+        <activity android:name="com.hnca.gongshangcheck.PenPrintActivity"
             android:launchMode="singleTask">
         </activity>
-        <activity android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.MainActivity"></activity>
-        <activity android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.LoginActivity"
+        <activity android:name="com.hnca.gongshangcheck.MainActivity"></activity>
+        <activity android:name="com.hnca.gongshangcheck.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" ></activity>
-        <activity android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.Splash">
+        <activity android:name="com.hnca.gongshangcheck.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.DialogActivity"
+            android:name="com.hnca.gongshangcheck.DialogActivity"
             android:theme="@style/ActivityDialogStyle"
             android:screenOrientation="landscape"/>
-        <activity android:name="com.yechaoa.gongshangcheck.com.hnca.gongshangcheck.RemotePDFActivity" android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"/>
+        <activity android:name="com.hnca.gongshangcheck.RemotePDFActivity" android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 
 </manifest>

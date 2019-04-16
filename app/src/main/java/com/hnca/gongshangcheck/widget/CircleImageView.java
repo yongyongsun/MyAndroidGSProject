@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 public class CircleImageView extends ImageView {
 

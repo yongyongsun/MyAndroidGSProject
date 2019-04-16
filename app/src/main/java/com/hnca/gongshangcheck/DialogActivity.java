@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 import com.zkteco.android.biometric.core.device.ParameterHelper;
 import com.zkteco.android.biometric.core.device.TransportType;
 import com.zkteco.android.biometric.core.utils.LogHelper;
@@ -66,7 +66,7 @@ public class DialogActivity extends FragmentActivity {
     private CountDownLatch countdownLatch = new CountDownLatch(1);
     private Context mContext = null;
     private UsbManager musbManager = null;
-    private final String ACTION_USB_PERMISSION = "com.yechaoa.multipleitempage.USB_PERMISSION";
+    private final String ACTION_USB_PERMISSION = "com.hnca.gongshangcheck.USB_PERMISSION";
 
     private TextView mTxtReport;
     private TextView mTxtStatus;

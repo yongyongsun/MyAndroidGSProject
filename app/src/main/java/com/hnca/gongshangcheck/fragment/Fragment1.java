@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hnca.gongshangcheck.App;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;

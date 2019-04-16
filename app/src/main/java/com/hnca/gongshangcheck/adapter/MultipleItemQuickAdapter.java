@@ -2,7 +2,7 @@ package com.hnca.gongshangcheck.adapter;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 import com.hnca.gongshangcheck.bean.MultipleItem;
 
 import java.util.List;

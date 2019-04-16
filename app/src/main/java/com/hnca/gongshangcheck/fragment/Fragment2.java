@@ -31,7 +31,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.hnca.gongshangcheck.App;
 import com.hnca.gongshangcheck.DialogActivity;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 import com.hnca.gongshangcheck.RemotePDFActivity;
 import com.hnca.gongshangcheck.dialog.DialogHelper;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogCancelListener;

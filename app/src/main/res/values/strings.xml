@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">MultipleItemPage</string>
+    <string name="app_name">工商抽检</string>
     <string name="title_home">历史记录</string>
     <string name="title_category">首页</string>
     <string name="title_cart">首页2</string>

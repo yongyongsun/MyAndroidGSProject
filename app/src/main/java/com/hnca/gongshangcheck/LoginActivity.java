@@ -32,7 +32,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import com.hnca.gongshangcheck.fragment.LoginUserInfo;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 import com.yechaoa.yutils.SpUtil;
 
 import java.io.IOException;

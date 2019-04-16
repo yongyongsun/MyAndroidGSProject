@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 
 import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;

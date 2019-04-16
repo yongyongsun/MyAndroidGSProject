@@ -1,10 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        configReleaseApk {
+            keyAlias 'key0'
+            keyPassword '111111'
+            storeFile file('E:/gongshang/gongshangcheck.jks')
+            storePassword '111111'
+        }
+    }
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.yechaoa.multipleitempage"
+        applicationId "com.hnca.gongshangcheck"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
@@ -16,6 +24,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configReleaseApk
         }
     }
     compileOptions {
@@ -44,6 +53,6 @@ dependencies {
     // Picasso 图片加载依赖
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation files('libs/zc_penutil_v6.jar')
-    implementation project(":library")
+    implementation project(':library')
     implementation project(':signlibrary')
 }

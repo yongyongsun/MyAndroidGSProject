@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hnca.gongshangcheck.adapter.MultipleItemQuickAdapter;
 import com.hnca.gongshangcheck.widget.CircleImageView;
-import com.yechaoa.gongshangcheck.R;
+import com.hnca.gongshangcheck.R;
 import com.hnca.gongshangcheck.bean.MultipleItem;
 import com.yechaoa.yutils.YUtils;
 
