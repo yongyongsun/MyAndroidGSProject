@@ -20,7 +20,24 @@ public class LoginUserInfo implements Serializable {
     private String loginTime;
     private String remark;
 
-    LoginUserInfo(){}
+    public LoginUserInfo() {
+        this.code = "";
+        this.message = "";
+        this.success = "";
+        this.userId = "";
+        this.token = "";
+        this.name = "";
+        this.username = "";
+        this.userCode = "";
+        this.birthday = "";
+        this.sex = "";
+        this.mobile = "";
+        this.avatar = "";
+        this.userStatus = "";
+        this.userType = "";
+        this.loginTime = "";
+        this.remark = "";
+    }
 
     public void setCode(String code) {
         this.code = code;

@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/list_item_padding"
-            android:layout_marginRight="@dimen/list_item_padding"
+            android:layout_margin="@dimen/list_item_padding"
             >
 
             <ImageView
@@ -37,8 +36,10 @@
                 android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:text="经营者(公章)"
+                android:paddingTop="@dimen/list_item_padding"
+                android:paddingBottom="@dimen/list_item_padding"
                 android:textColor="#ffffff"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
         </FrameLayout>
 
         <TextView
@@ -49,8 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginLeft="@dimen/list_item_padding"
-            android:layout_marginRight="@dimen/list_item_padding"
+            android:layout_margin="@dimen/list_item_padding"
             >
             <ImageView
                 android:id="@+id/tv_sign_print_img"
@@ -69,8 +69,10 @@
                 android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:text="负责人签字"
+                android:paddingTop="@dimen/list_item_padding"
+                android:paddingBottom="@dimen/list_item_padding"
                 android:textColor="#ffffff"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
         </FrameLayout>
         <TextView
             android:layout_width="1dp"
@@ -85,6 +87,7 @@
         android:gravity="right"
         android:layout_marginRight="@dimen/margin"
         android:text="签字日期2019年4月11日"
+        android:visibility="gone"
         android:textSize="24dp" />
     <TextView
         android:layout_width="match_parent"

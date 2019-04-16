@@ -20,6 +20,7 @@
         android:layout_margin="@dimen/list_item_padding"
         android:background="@drawable/bg_edittext"
         android:maxLines="1"
+        android:paddingLeft="@dimen/sub_item_right_left_padding"
         android:singleLine="true" />
 
 

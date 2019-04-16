@@ -90,7 +90,6 @@ public class Fragment4 extends Fragment {
 
     private void initItemData() {
         itemDataList = new ArrayList<>();
-
         multipleItem = new MultipleItem(MultipleItem.TYPE_MY_SHOW, 5);
         multipleItem.mStrPhone = mUserInfo.getMobile();
         multipleItem.mStrRole = "角色";
@@ -202,7 +201,12 @@ public class Fragment4 extends Fragment {
     }
 
     public void getLoginData(LoginUserInfo userinfo){
-        mUserInfo = userinfo;
+        if (userinfo != null) {
+            mUserInfo = userinfo;
+        }else {
+            mUserInfo = new LoginUserInfo();
+        }
     }
+
 
 }
