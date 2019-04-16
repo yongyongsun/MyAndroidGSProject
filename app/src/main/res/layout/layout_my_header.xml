@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary"
     android:padding="20dp">
 
-    <com.yechaoa.multipleitempage.widget.CircleImageView
+    <com.hnca.gongshangcheck.widget.CircleImageView
         android:id="@+id/my_header_image"
         android:layout_width="60dp"
         android:layout_height="60dp"

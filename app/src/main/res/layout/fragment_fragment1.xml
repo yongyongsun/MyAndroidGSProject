@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.yechaoa.multipleitempage.fragment.SwipeFlushView
+    <com.hnca.gongshangcheck.fragment.SwipeFlushView
         android:id="@+id/swipeFlushView"
         autoloading="true"
         app:autoFlushing="true"
@@ -20,6 +20,6 @@
             android:scrollbarStyle="outsideOverlay"
             android:dividerHeight="2dp" />
 
-    </com.yechaoa.multipleitempage.fragment.SwipeFlushView>
+    </com.hnca.gongshangcheck.fragment.SwipeFlushView>
 
 </FrameLayout>

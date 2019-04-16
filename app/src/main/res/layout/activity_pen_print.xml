@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PenPrintActivity">
+    tools:context="com.hnca.gongshangcheck.PenPrintActivity">
 
     <include
         android:id="@+id/actionbar"
@@ -14,7 +14,7 @@
         android:layout_height="@dimen/sign_actionbar_height"
         android:layout_alignParentTop="true" />
 
-    <com.yechaoa.multipleitempage.DrawView
+    <com.hnca.gongshangcheck.DrawView
         android:id="@+id/drawview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

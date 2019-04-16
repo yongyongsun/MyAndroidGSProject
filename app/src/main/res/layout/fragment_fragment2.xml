@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 样品名称 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_sample_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,10 +34,10 @@
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </com.yechaoa.multipleitempage.bean.sub_item_view>
+                </com.hnca.gongshangcheck.bean.sub_item_view>
 
                 <!-- 商标 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_mark"
                     android:layout_weight="2"
                     android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content" />
 
                 <!-- 等级 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_level"
                     android:layout_weight="2"
                     android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 规格型号 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_mode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     app:show_label="规格型号" />
 
                 <!-- 产品标准 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_standard"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                 </LinearLayout>
 
                 <!-- 样品编号 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_smaple_no"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 销售单价 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_sale_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,21 +146,21 @@
                     app:show_label="销售单价" />
 
                 <!-- 进货量 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_purchase_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="进货量" />
                 <!-- 销售量 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_sale_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="销售量" />
                 <!-- 存货量 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_inventory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 检验用样品数量 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_check_sample_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                     app:show_label="检验用样品数量" />
 
                 <!-- 备份样品数量 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_backup_sample_count"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -206,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 备份样品封存地 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_backup_sample_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -214,7 +214,7 @@
                     app:show_label="备份样品封存地" />
 
                 <!-- 存货地点 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_inventory_a"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 经营者名称 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -252,14 +252,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 通信地址 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="通讯地址" />
                 <!-- 邮编 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_postalcode"
                     android:layout_weight="2"
                     android:layout_width="match_parent"
@@ -278,21 +278,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 法定代表人 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_owner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="法定代表人" />
                 <!-- 电话 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_owner_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="电话" />
                 <!-- 传真 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_owner_fax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -310,21 +310,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 联系人 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_contacts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="联系人" />
                 <!-- 移动电话 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_mobile_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="移动电话" />
                 <!-- E-mail -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_mail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -481,7 +481,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 生产或供货单位名称 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -499,7 +499,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 通讯地址 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier_addi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -518,21 +518,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 联系人 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier_contacts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="联系人" />
                 <!-- 电话 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:show_label="电话" />
                 <!-- 传真 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier_fax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -548,14 +548,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- 通知书编号 -->
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/iv_notice_number"
                     android:layout_width="wrap_content"
                     app:show_label="通知书编号"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:layout_height="wrap_content" />
-                <com.yechaoa.multipleitempage.bean.sub_item_view
+                <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/iv_check_number"
                     android:layout_width="wrap_content"
                     app:show_label="检通字编号"

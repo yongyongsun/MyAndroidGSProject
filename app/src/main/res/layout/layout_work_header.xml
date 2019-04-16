@@ -20,7 +20,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp">
         <!-- 年份 -->
-        <com.yechaoa.multipleitempage.bean.sub_item_view
+        <com.hnca.gongshangcheck.bean.sub_item_view
             android:id="@+id/sub_iv_head_year"
             android:layout_width="wrap_content"
             app:show_label="抽检年份"
