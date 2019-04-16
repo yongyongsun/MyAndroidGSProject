@@ -1,6 +1,9 @@
 package com.hnca.gongshangcheck.fragment;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,14 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hnca.gongshangcheck.LoginActivity;
+import com.hnca.gongshangcheck.MainActivity;
 import com.hnca.gongshangcheck.adapter.MultipleItemQuickAdapter;
 import com.hnca.gongshangcheck.widget.CircleImageView;
 import com.hnca.gongshangcheck.R;
 import com.hnca.gongshangcheck.bean.MultipleItem;
+import com.yechaoa.yutils.SpUtil;
 import com.yechaoa.yutils.YUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 public class Fragment4 extends Fragment {
 
@@ -64,19 +72,19 @@ public class Fragment4 extends Fragment {
                 android.R.color.holo_orange_light);
 
         //暂时不处理刷新 by syy
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        multipleItemQuickAdapter.notifyDataSetChanged();
-//                        mSwipeRefreshLayout.setRefreshing(false);
-//                        YUtils.showToast("刷新完成");
-//                    }
-//                }, 2000);
-//            }
-//        });
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        multipleItemQuickAdapter.notifyDataSetChanged();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        YUtils.showToast("刷新完成");
+                    }
+                }, 2000);
+            }
+        });
     }
 
 
@@ -183,7 +191,7 @@ public class Fragment4 extends Fragment {
                         YUtils.showToast("帮助");
                         break;
                     case R.id.iv_logout:
-                        YUtils.showToast("退出");
+                        loginOut();
 
                         break;
                 }
@@ -200,5 +208,22 @@ public class Fragment4 extends Fragment {
         }
     }
 
+
+    /**
+     * 弹出退出提示
+     */
+    private void loginOut() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("提示")
+                .setMessage("是否确定退出？")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定", (dialog, which) -> {
+                    SpUtil.removeAll();
+                    Intent it=new Intent(getContext(), LoginActivity.class);//
+                    startActivity(it);
+                    getActivity().finish();
+                });
+        builder.show();
+    }
 
 }

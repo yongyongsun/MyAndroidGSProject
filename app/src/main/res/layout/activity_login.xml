@@ -73,11 +73,15 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+                android:background="@drawable/button_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:paddingTop="@dimen/list_item_padding"
+                android:paddingBottom="@dimen/list_item_padding"
+                android:layout_marginTop="20dp"
                 android:text="@string/action_sign_in"
+                android:textSize="20dp"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
         </LinearLayout>

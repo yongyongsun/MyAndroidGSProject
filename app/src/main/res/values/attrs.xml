@@ -12,6 +12,7 @@
     </declare-styleable>
     <declare-styleable name="layout_sub_item">
         <attr name="show_label" format="string" />
+        <attr name="input_type" format="string" />
     </declare-styleable>
 
     <!-- 实现了 ListView 的上拉加载的 SwipeRefreshLayouot. -->

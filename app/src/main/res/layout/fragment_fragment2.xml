@@ -143,7 +143,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="销售单价" />
+                    app:show_label="销售单价"
+                    app:input_type="TAG_CLASS_NUM"/>
 
                 <!-- 进货量 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
@@ -151,21 +152,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="进货量" />
+                    app:show_label="进货量"
+                    app:input_type="TAG_CLASS_NUM"/>
                 <!-- 销售量 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_sale_volume"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="销售量" />
+                    app:show_label="销售量"
+                    app:input_type="TAG_CLASS_NUM"/>
                 <!-- 存货量 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_inventory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="存货量" />
+                    app:show_label="存货量"
+                    app:input_type="TAG_CLASS_NUM"/>
             </LinearLayout>
 
             <TextView
@@ -184,7 +188,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="检验用样品数量" />
+                    app:show_label="检验用样品数量"
+                    app:input_type="TAG_CLASS_NUM"/>
 
                 <!-- 备份样品数量 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
@@ -192,6 +197,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     app:show_label="备份样品数量"
+                    app:input_type="TAG_CLASS_NUM"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -264,6 +270,7 @@
                     android:layout_weight="2"
                     android:layout_width="match_parent"
                     app:show_label="邮编"
+                    app:input_type="TAG_CLASS_NUM"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -290,14 +297,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="电话" />
+                    app:show_label="电话"
+                    app:input_type="TAG_CLASS_PHONE"/>
                 <!-- 传真 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_owner_fax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="传真" />
+                    app:show_label="传真"
+                    app:input_type="TAG_CLASS_PHONE"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -322,7 +331,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="移动电话" />
+                    app:show_label="移动电话"
+                    app:input_type="TAG_CLASS_PHONE"/>
                 <!-- E-mail -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_operator_mail"
@@ -530,14 +540,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="电话" />
+                    app:show_label="电话"
+                    app:input_type="TAG_CLASS_PHONE"/>
                 <!-- 传真 -->
                 <com.hnca.gongshangcheck.bean.sub_item_view
                     android:id="@+id/sub_iv_product_supplier_fax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:show_label="传真" />
+                    app:show_label="传真"
+                    app:input_type="TAG_CLASS_PHONE"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -578,22 +590,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/lineGray" />
-            <TextView
+            <Button
                 android:id="@+id/tv_submit"
-                android:layout_width="240dp"
+                android:layout_width="500dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="提 交"
                 android:layout_margin="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:layout_marginTop="@dimen/margin"
+                android:background="@drawable/button_default"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"
-                android:textSize="32dp" />
+                android:textSize="32dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="1dp"
                 android:background="@color/lineGray" />
 
         </LinearLayout>

@@ -54,6 +54,7 @@ public class Fragment1 extends Fragment{
     private List<EntityInfo.ListBean> dataList = new ArrayList<>();
 
     private int pageNum;
+    private boolean bFirstStarted = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,21 +91,24 @@ public class Fragment1 extends Fragment{
             }
         });
 
-        // 刷新事件
-        swipeFlushView.setOnFlushListener(() -> {
+        if (!bFirstStarted) {
+            // 刷新事件
+            swipeFlushView.setOnFlushListener(() -> {
+                pageNum = 1;
+                getDataList();
+            });
+
+            // 加载事件
+            swipeFlushView.setOnLoadListener(() -> {
+                pageNum++;
+                getDataList();
+            });
+
             pageNum = 1;
             getDataList();
-        });
 
-        // 加载事件
-        swipeFlushView.setOnLoadListener(() -> {
-            pageNum++;
-            getDataList();
-        });
-
-        pageNum = 1;
-        getDataList();
-
+            bFirstStarted = true;
+        }
     }
 
     private void getDataList() {

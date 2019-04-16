@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hnca.gongshangcheck.R;
+import com.yechaoa.yutils.YUtils;
 
 import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
@@ -36,12 +37,12 @@ import es.voghdev.pdfviewpager.library.util.FileUtil;
 public class RemotePDFActivity extends BaseSampleActivity implements DownloadFile.Listener {
     private static final String TAG = "RemotePDFActivity";
     LinearLayout root;
-    RemotePDFViewPager remotePDFViewPager;
+    RemotePDFViewPager remotePDFViewPager = null;
     EditText etPdfUrl;
     Button btnDownload;
     PDFPagerAdapter adapter;
     private TextView mTvTipsInfo;
-    private String mPdfUrl;
+    private String mPdfUrl = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +86,15 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     protected void onStart() {
         Log.i(TAG, "onStart: ");
         super.onStart();
-        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
-                RemotePDFActivity.this);
+        if (remotePDFViewPager == null) {
+            if (mPdfUrl == null){
+                YUtils.showToast(TAG + "打开PDF URL 为空");
+                return;
+            }
+
+            remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
+                    RemotePDFActivity.this);
+        }
 
     }
 

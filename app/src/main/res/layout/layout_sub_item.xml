@@ -23,5 +23,4 @@
         android:paddingLeft="@dimen/sub_item_right_left_padding"
         android:singleLine="true" />
 
-
 </LinearLayout>
