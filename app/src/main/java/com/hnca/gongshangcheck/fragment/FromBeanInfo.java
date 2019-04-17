@@ -16,12 +16,12 @@ public class FromBeanInfo {
     private String productStandard = "";
     private String manufactureDate = "";
     private String sampleNo = "";
-    private String salePrice = "";
-    private String purchaseVolume = "";
-    private String salesVolume = "";
-    private String inventory = "";
-    private String checkSampleCount = "";
-    private String backupSampleCount = "";
+    private int    salePrice = 0;
+    private int    purchaseVolume = 0;
+    private int    salesVolume = 0;
+    private int    inventory = 0;
+    private int    checkSampleCount = 0;
+    private int    backupSampleCount = 0;
     private String backupSampleSealupAddress = "";
     private String inventoryAddress = "";
     private String operator = "";
@@ -33,8 +33,8 @@ public class FromBeanInfo {
     private String operatorContacts = "";
     private String operatorMobile = "";
     private String operatorEmail = "";
-    private String operatorLocation = "";
-    private String checkPlace = "";
+    private int    operatorLocation = 1;
+    private int    checkPlace = 1;
     private String producerSupplier = "";
     private String producerSupplierAddress = "";
     private String producerSupplierContacts = "";
@@ -103,27 +103,27 @@ public class FromBeanInfo {
         this.sampleNo = sampleNo;
     }
 
-    public void setSalePrice(String salePrice) {
+    public void setSalePrice(int salePrice) {
         this.salePrice = salePrice;
     }
 
-    public void setPurchaseVolume(String purchaseVolume) {
+    public void setPurchaseVolume(int purchaseVolume) {
         this.purchaseVolume = purchaseVolume;
     }
 
-    public void setSalesVolume(String salesVolume) {
+    public void setSalesVolume(int salesVolume) {
         this.salesVolume = salesVolume;
     }
 
-    public void setInventory(String inventory) {
+    public void setInventory(int inventory) {
         this.inventory = inventory;
     }
 
-    public void setCheckSampleCount(String checkSampleCount) {
+    public void setCheckSampleCount(int checkSampleCount) {
         this.checkSampleCount = checkSampleCount;
     }
 
-    public void setBackupSampleCount(String backupSampleCount) {
+    public void setBackupSampleCount(int backupSampleCount) {
         this.backupSampleCount = backupSampleCount;
     }
 
@@ -171,11 +171,11 @@ public class FromBeanInfo {
         this.operatorEmail = operatorEmail;
     }
 
-    public void setOperatorLocation(String operatorLocation) {
+    public void setOperatorLocation(int operatorLocation) {
         this.operatorLocation = operatorLocation;
     }
 
-    public void setCheckPlace(String checkPlace) {
+    public void setCheckPlace(int checkPlace) {
         this.checkPlace = checkPlace;
     }
 

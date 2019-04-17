@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -166,6 +167,14 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     public void onProgressUpdate(int progress, int total) {
         String str = "正在下载PDF文件，请稍后... 进度：" + progress +"/" + total;
         mTvTipsInfo.setText(str);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        setResult(RESULT_OK);
+        finish();
     }
 }
 

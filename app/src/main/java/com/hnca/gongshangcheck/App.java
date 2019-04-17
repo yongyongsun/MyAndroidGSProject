@@ -2,6 +2,7 @@ package com.hnca.gongshangcheck;
 
 import android.app.Application;
 
+import com.hnca.gongshangcheck.fragment.LoginUserInfo;
 import com.yechaoa.yutils.ActivityUtil;
 import com.yechaoa.yutils.LogUtil;
 import com.yechaoa.yutils.YUtils;
@@ -12,7 +13,7 @@ import com.yechaoa.yutils.YUtils;
  */
 public class App extends Application {
     private final static String URL="http://192.168.0.143:8081/app/";
-
+    private LoginUserInfo mUserInfo;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -45,5 +46,12 @@ public class App extends Application {
     //退出登录
     public String getURLForLogout(){
         return URL + "user/logout";
+    }
+
+    public void setLoginUserInfo(LoginUserInfo info){
+        mUserInfo = info;
+    }
+    public LoginUserInfo getLoginUserInfo(){
+        return  mUserInfo;
     }
 }

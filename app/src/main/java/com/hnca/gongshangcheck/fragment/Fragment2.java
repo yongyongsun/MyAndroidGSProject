@@ -156,12 +156,14 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 TextView tv_date_select = getActivity().findViewById(R.id.tv_manufacture_data);
                 formInfo.setManufactureDate(tv_date_select.getText().toString());
                 formInfo.setSampleNo(findViewByEditTextId(R.id.sub_iv_smaple_no));
-                formInfo.setSalePrice(findViewByEditTextId(R.id.sub_iv_sale_price));
-                formInfo.setPurchaseVolume(findViewByEditTextId(R.id.sub_iv_purchase_volume));
-                formInfo.setSalesVolume(findViewByEditTextId(R.id.sub_iv_sale_volume));
-                formInfo.setInventory(findViewByEditTextId(R.id.sub_iv_inventory));
-                formInfo.setCheckSampleCount(findViewByEditTextId(R.id.sub_iv_check_sample_count));
-                formInfo.setBackupSampleCount(findViewByEditTextId(R.id.sub_iv_backup_sample_count));
+
+                formInfo.setSalePrice(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_sale_price)));
+
+                formInfo.setPurchaseVolume(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_purchase_volume)));
+                formInfo.setSalesVolume(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_sale_volume)));
+                formInfo.setInventory(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_inventory)));
+                formInfo.setCheckSampleCount(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_check_sample_count)));
+                formInfo.setBackupSampleCount(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_backup_sample_count)));
                 formInfo.setBackupSampleSealupAddress(findViewByEditTextId(R.id.sub_iv_backup_sample_a));
                 formInfo.setInventoryAddress(findViewByEditTextId(R.id.sub_iv_inventory_a));
                 formInfo.setOperator(findViewByEditTextId(R.id.sub_iv_operator));
@@ -176,10 +178,10 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 //radiobutton part
                 RadioGroup group1 = getActivity().findViewById(R.id.rd_group_operator_location);
                 String strRadio1 = getActivity().findViewById(group1.getCheckedRadioButtonId()).getTag().toString();
-                formInfo.setOperatorLocation(strRadio1);
+                formInfo.setOperatorLocation(stringToIntCheck(strRadio1));
                 RadioGroup group2 = getActivity().findViewById(R.id.rd_group_check_place);
                 String strRadio2 = getActivity().findViewById(group2.getCheckedRadioButtonId()).getTag().toString();
-                formInfo.setCheckPlace(strRadio2);
+                formInfo.setCheckPlace(stringToIntCheck(strRadio2));
 
                 formInfo.setProducerSupplier(findViewByEditTextId(R.id.sub_iv_product_supplier));
                 formInfo.setProducerSupplierAddress(findViewByEditTextId(R.id.sub_iv_product_supplier_addi));
@@ -255,7 +257,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                             Log.i("fragment2 pdfurl = ",strUrlpdf);
                             Intent intent = new Intent(getActivity(),RemotePDFActivity.class);
                             intent.putExtra("pdfurl",strUrlpdf);
-                            startActivity(intent);
+                            getActivity().startActivityForResult(intent,1001);
 
                         }else {
                             Gson g = new Gson();
@@ -270,8 +272,6 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                     initSaveProgressDlg();
                 }
                 mSaveProgressDlg.show();
-
-
 
 
             }
@@ -516,7 +516,16 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
             @Override
             public void onConfirm(int year, int month, int dayOfMonth) {
                 //YUtils.showToast(year + "-" + month + "-" + dayOfMonth);
-                view.setText(year + "年" + month + "月" + dayOfMonth + "日");
+                String strMonth = Integer.toString(month);
+                if (month < 10){
+                    strMonth = "0" + month;
+                }
+
+                String strDay = Integer.toString(dayOfMonth);
+                if (dayOfMonth < 10){
+                    strDay = "0" + dayOfMonth;
+                }
+                view.setText(String.format("%1$d%2$s%3$s",year,strMonth,strDay));
             }
 
             @Override
@@ -524,5 +533,11 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 //YUtils.showToast("cancle");
             }
         });
+    }
+    private int stringToIntCheck(String str){
+        if (str.isEmpty()){
+            str = "0";
+        }
+        return Integer.parseInt(str);
     }
 }

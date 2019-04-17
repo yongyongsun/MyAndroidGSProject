@@ -357,6 +357,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     SpUtil.setString("password",mPassword);
                     SpUtil.setString("userId",mUserInfoObject.getUserId());
                     SpUtil.setString("token",mUserInfoObject.getToken());
+
+                    //保存用户登录信息到APP
+                    appState.setLoginUserInfo(mUserInfoObject);
                     return true;
                 }else {
                     Log.e("LoginActivity userinfo:", response.body().string());
@@ -373,16 +376,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             if (success) {
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("userinfo", mUserInfoObject);
-                intent.putExtras(bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("userinfo", mUserInfoObject);
+//                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
+                showProgress(false);
             }
-            showProgress(false);
         }
 
         @Override

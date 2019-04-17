@@ -34,8 +34,9 @@ public class BaseSampleActivity extends AppCompatActivity {
     }
 
     protected void configureActionBar() {
-        int color = ContextCompat.getColor(this, R.color.pdfViewPager_ab_color);
+        int color = ContextCompat.getColor(this, R.color.colorPrimary);
         ActionBar ab = getSupportActionBar();
         ab.setBackgroundDrawable(new ColorDrawable(color));
+        ab.setTitle("工商抽检PDF阅读器");
     }
 }
