@@ -26,6 +26,7 @@
             app:show_label="抽检年份"
             android:gravity="center"
             android:layout_weight="1"
+            app:input_type="TAG_CLASS_NUM"
             android:layout_height="wrap_content" />
 
         <LinearLayout
