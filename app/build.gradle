@@ -31,6 +31,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //添加APK包名
+    applicationVariants.all { variant ->
+        variant.outputs.all {output ->
+            def date = new Date().format("yyyyMMdd" , TimeZone.getTimeZone("GMT+08"))
+            if(variant.buildType.name.equals('debug')){
+                output.outputFileName = "gongshangcheck_${date}_${versionName}_debug.apk"
+            }
+            if(variant.buildType.name.equals('release')){
+                output.outputFileName = "gongshangcheck_${date}_${versionName}_release.apk"
+            }
+        }
+    }
 }
 
 dependencies {

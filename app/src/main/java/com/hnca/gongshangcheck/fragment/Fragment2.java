@@ -122,7 +122,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         //适配器
         ArrayAdapter<String> arr_adapter= new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, data_list);
         //设置样式
-        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arr_adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         //加载适配器
         sp_head_class.setAdapter(arr_adapter);
 

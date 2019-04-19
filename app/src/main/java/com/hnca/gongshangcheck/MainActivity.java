@@ -22,6 +22,7 @@ import com.hnca.gongshangcheck.fragment.Fragment3;
 import com.hnca.gongshangcheck.fragment.Fragment4;
 import com.hnca.gongshangcheck.fragment.LoginUserInfo;
 import com.hnca.gongshangcheck.R;
+import com.yechaoa.yutils.YUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
         mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mNavigation.setSelectedItemId(mNavigation.getMenu().getItem(1).getItemId());
 
 //        //数据部分
 //        LoginUserInfo userinfo = (LoginUserInfo)getIntent().getSerializableExtra("userinfo");
