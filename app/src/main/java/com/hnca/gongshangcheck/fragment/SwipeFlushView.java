@@ -53,6 +53,9 @@ public class SwipeFlushView extends SwipeRefreshLayout {
      */
     private boolean autoLoading;
 
+    private  int mCurPosition = 0;
+    private int mCurtop= 0;
+
     public SwipeFlushView(Context context) {
         this(context, null);
     }
@@ -249,6 +252,12 @@ public class SwipeFlushView extends SwipeRefreshLayout {
                     // 自动滑出 FooterView 加载数据
                     loadData();
                 }
+                //当我们停止滑动后，获得listview可视区域的第一条item的Position
+                if(scrollState == SCROLL_STATE_IDLE){
+                    mCurPosition = mListView.getFirstVisiblePosition();
+                }
+//                View v = mListView.getChildAt(0);
+//                mCurtop = (v==null)?0:v.getTop();//item具体上面区域位置
             }
 
             @Override
@@ -341,5 +350,9 @@ public class SwipeFlushView extends SwipeRefreshLayout {
      */
     public void setOnFlushListener(OnFlushListener listener) {
         mFlushListener = listener;
+    }
+
+    public int  getCurScrollPostion(){
+        return mCurPosition;
     }
 }

@@ -128,6 +128,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
         //时间选择器
         TextView tv_date_select = getActivity().findViewById(R.id.tv_manufacture_data);
+        tv_date_select.setTag("");
         tv_date_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +155,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 formInfo.setSpecificationsModels(findViewByEditTextId(R.id.sub_iv_mode));
                 formInfo.setProductStandard(findViewByEditTextId(R.id.sub_iv_product_standard));
                 TextView tv_date_select = getActivity().findViewById(R.id.tv_manufacture_data);
-                formInfo.setManufactureDate(tv_date_select.getText().toString());
+                formInfo.setManufactureDate(tv_date_select.getTag().toString());
                 formInfo.setSampleNo(findViewByEditTextId(R.id.sub_iv_smaple_no));
 
                 formInfo.setSalePrice(stringToIntCheck(findViewByEditTextId(R.id.sub_iv_sale_price)));
@@ -229,6 +230,9 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 //Log.i("Fragment2, formInfo",formInfo.toString());
 
 
+                if (mSaveProgressDlg == null) {
+                    initSaveProgressDlg();
+                }
 
                 Gson g = new Gson();
                 String strJson = g.toJson(formInfo);
@@ -267,10 +271,6 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                         }
                     }
                 });
-
-                if (mSaveProgressDlg == null) {
-                    initSaveProgressDlg();
-                }
                 mSaveProgressDlg.show();
 
 
@@ -525,7 +525,8 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 if (dayOfMonth < 10){
                     strDay = "0" + dayOfMonth;
                 }
-                view.setText(String.format("%1$d%2$s%3$s",year,strMonth,strDay));
+                view.setText(String.format("%1$d年%2$s月%3$s日",year,strMonth,strDay));
+                view.setTag(String.format("%1$d%2$s%3$s",year,strMonth,strDay));
             }
 
             @Override

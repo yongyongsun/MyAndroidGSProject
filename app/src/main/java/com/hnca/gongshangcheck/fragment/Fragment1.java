@@ -68,6 +68,11 @@ public class Fragment1 extends Fragment{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
@@ -90,8 +95,10 @@ public class Fragment1 extends Fragment{
 
             }
         });
+        int pos = swipeFlushView.getCurScrollPostion();
+        listView.setSelectionFromTop(pos,0);
 
-        if (!bFirstStarted) {
+
             // 刷新事件
             swipeFlushView.setOnFlushListener(() -> {
                 pageNum = 1;
@@ -103,10 +110,9 @@ public class Fragment1 extends Fragment{
                 pageNum++;
                 getDataList();
             });
-
+        if (!bFirstStarted) {
             pageNum = 1;
             getDataList();
-
             bFirstStarted = true;
         }
     }

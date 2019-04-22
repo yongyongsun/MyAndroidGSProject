@@ -6,7 +6,7 @@
     <com.hnca.gongshangcheck.fragment.SwipeFlushView
         android:id="@+id/swipeFlushView"
         autoloading="true"
-        app:autoFlushing="true"
+        app:autoFlushing="false"
         app:autoLoading="false"
         app:flushingEnable="true"
         android:layout_width="match_parent"
