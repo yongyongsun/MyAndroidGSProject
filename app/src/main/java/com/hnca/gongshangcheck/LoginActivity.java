@@ -347,9 +347,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Request requestPost=new Request.Builder().url(URL).post(requestBody).build();
                 Response response = null;
                 response = client.newCall(requestPost).execute();//得到Response
-                if (response.isSuccessful()) {
+
+                String strResponse = response.body().string();
+                if (strResponse.indexOf("200") != -1) {
                     //YUtils.showToast("screenwidth:" + YUtils.getScreenWidth() + " screenheight :" + YUtils.getScreenHeight());
-                    mUserInfoObject = g.fromJson(response.body().string(), LoginUserInfo.class);//把JSON字符串转为对象
+                    mUserInfoObject = g.fromJson(strResponse, LoginUserInfo.class);//把JSON字符串转为对象
                     Log.i("LoginActivity userinfo:", mUserInfoObject.toString());
                     //清除和保存用户登录状态
                     SpUtil.removeAll();
