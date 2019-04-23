@@ -3,6 +3,7 @@ package com.hnca.gongshangcheck;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -24,7 +25,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 try{
                     sleep(2500);//使程序休眠五秒
-                    Intent it=new Intent(getApplicationContext(), MainActivity.class);//启动MainActivity
+                    Intent it=new Intent(getApplicationContext(),LoginActivity.class);//启动MainActivity
                     startActivity(it);
                     finish();//关闭当前活动
                 }catch (Exception e){

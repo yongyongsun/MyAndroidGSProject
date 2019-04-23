@@ -12,7 +12,7 @@ import com.yechaoa.yutils.YUtils;
  * Describe :
  */
 public class App extends Application {
-    private final static String URL="http://192.168.0.143:8081/app/";
+    private final static String URL="http://digitization.hncatrust.com/app/";
     private LoginUserInfo mUserInfo;
     @Override
     public void onCreate() {

@@ -13,14 +13,14 @@ ext {
 
     libraryDescription = 'Android widget to display PDF documents in your Views, Activities or Fragments.'
 
-    siteUrl = 'https://github.com/voghDev/PdfViewPager'
-    gitUrl = 'https://github.com/voghDev/PdfViewPager.git'
+    siteUrl = ''
+    gitUrl = ''
 
     libraryVersion = '1.0.6'
 
     developerId = 'voghDev'
     developerName = 'Olmo Gallegos'
-    developerEmail = 'vendofiatpunto@hotmail.com'
+    developerEmail = ''
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'

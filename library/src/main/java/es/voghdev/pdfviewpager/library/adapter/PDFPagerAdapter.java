@@ -53,7 +53,7 @@ public class PDFPagerAdapter extends BasePDFPagerAdapter {
 
         Bitmap bitmap = bitmapContainer.get(position);
         ssiv.setImage(ImageSource.bitmap(bitmap));
-        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_PRINT);
         page.close();
 
         ((ViewPager) container).addView(v, 0);

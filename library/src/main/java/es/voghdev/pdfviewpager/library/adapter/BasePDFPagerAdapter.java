@@ -134,7 +134,7 @@ public class BasePDFPagerAdapter extends PagerAdapter {
         PdfRenderer.Page page = getPDFPage(renderer, position);
 
         Bitmap bitmap = bitmapContainer.get(position);
-        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_PRINT);
         page.close();
 
         iv.setImageBitmap(bitmap);

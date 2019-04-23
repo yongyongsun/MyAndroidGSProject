@@ -37,6 +37,7 @@ import com.hnca.gongshangcheck.dialog.DialogHelper;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogCancelListener;
 import com.hnca.gongshangcheck.dialog.inf.OnDialogConfirmDataListener;
 import com.hnca.gongshangcheck.utils.DateSelectUtil;
+import com.yechaoa.yutils.ParseUtil;
 import com.yechaoa.yutils.SpUtil;
 import com.yechaoa.yutils.YUtils;
 
@@ -254,7 +255,8 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                     public void onResponse(Call call, Response response) throws IOException {
                         mSaveProgressDlg.dismiss();
                         String result = response.body().string();
-                        if (response.isSuccessful()) {
+
+                        if (result.indexOf("200") != -1) {
                             Gson g = new Gson();
                             FormSheetResponseInfo info = g.fromJson(result,FormSheetResponseInfo.class);
                             String strUrlpdf = info.getWorkSheetPDFurl();
