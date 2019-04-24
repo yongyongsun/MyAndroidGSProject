@@ -29,8 +29,11 @@ import android.widget.TextView;
 import com.hnca.gongshangcheck.R;
 import com.yechaoa.yutils.YUtils;
 
+import java.text.DecimalFormat;
+
 import es.voghdev.pdfviewpager.library.RemotePDFViewPager;
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
+import es.voghdev.pdfviewpager.library.adapter.PngPagerAdapter;
 import es.voghdev.pdfviewpager.library.remote.DownloadFile;
 import es.voghdev.pdfviewpager.library.util.FileUtil;
 
@@ -41,7 +44,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     RemotePDFViewPager remotePDFViewPager = null;
     EditText etPdfUrl;
     Button btnDownload;
-    PDFPagerAdapter adapter;
+    PngPagerAdapter adapter;
     private TextView mTvTipsInfo;
     private String mPdfUrl = null;
     @Override
@@ -96,7 +99,6 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
             remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
                     RemotePDFActivity.this);
         }
-
     }
 
     @Override
@@ -151,7 +153,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     @Override
     public void onSuccess(String url, String destinationPath) {
         Log.i(TAG, "onSuccess: ");
-        adapter = new PDFPagerAdapter(this, FileUtil.extractFileNameFromURL(url));
+        adapter = new PngPagerAdapter(this, FileUtil.extractFileNameFromURL(destinationPath));
         remotePDFViewPager.setAdapter(adapter);
         updateLayout();
         //showDownloadButton();
@@ -165,7 +167,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
 
     @Override
     public void onProgressUpdate(int progress, int total) {
-        String str = "正在下载PDF文件，请稍后... 进度：" + progress +"/" + total;
+        String str = "正在下载PDF文件，请稍后... 进度：" + formetFileSize(progress) +"/" + formetFileSize(total);
         mTvTipsInfo.setText(str);
     }
 
@@ -175,6 +177,29 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
         //super.onBackPressed();
         setResult(RESULT_OK);
         finish();
+    }
+
+    private String formetFileSize(long fileS)
+    {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        String wrongSize="0B";
+        if(fileS==0){
+            return wrongSize;
+        }
+        if (fileS < 1024){
+            fileSizeString = df.format((double) fileS) + "B";
+        }
+        else if (fileS < 1048576){
+            fileSizeString = df.format((double) fileS / 1024) + "KB";
+        }
+        else if (fileS < 1073741824){
+            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+        }
+        else{
+            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
+        }
+        return fileSizeString;
     }
 }
 
