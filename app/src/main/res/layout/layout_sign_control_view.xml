@@ -26,6 +26,7 @@
                 android:layout_height="350dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/sign_background"
+                android:tag="0"
                 android:scaleType="centerCrop" />
 
             <TextView
@@ -58,6 +59,7 @@
                 android:layout_height="350dp"
                 android:background="@drawable/sign_background"
                 android:adjustViewBounds="true"
+                android:tag="0"
                 android:scaleType="centerCrop"
                 />
 

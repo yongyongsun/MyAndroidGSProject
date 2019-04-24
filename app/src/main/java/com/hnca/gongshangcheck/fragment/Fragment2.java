@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +24,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -44,6 +47,7 @@ import com.yechaoa.yutils.YUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -141,6 +145,11 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         tv_submit_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LinearLayout layout = getActivity().findViewById(R.id.ly_fragment2_id);
+                if (!checkEdittextIsEmpty(layout)){
+                    return;
+                }
+
                 FromBeanInfo formInfo = new FromBeanInfo();
                 formInfo.setUserId(SpUtil.getString("userId"));
                 formInfo.setToken(SpUtil.getString("token"));
@@ -433,25 +442,31 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                 Bundle bundle = data.getBundleExtra("bundle");
                 Bitmap bitmap = bundle.getParcelable("bitmap");
                 mLeftTopPrintView.setBackground(new BitmapDrawable(bitmap));
+                mLeftTopPrintView.setTag("1");
 
             }if (BITMAP_LEFT_TOP2 == requestCode) {
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
                 Bitmap bit11 = BitmapUtil.zoomImg(bit,mLeftTopPrintView2.getWidth());
                 mLeftTopPrintView2.setBackground(new BitmapDrawable(bit11));
+                mLeftTopPrintView2.setTag("1");
 
             }else if (BITMAP_LEFT_BOOTOM1 == requestCode){
                 Bundle bundle = data.getBundleExtra("bundle");
                 Bitmap bitmap = bundle.getParcelable("bitmap");
                 mLeftBottomPrintView.setBackground(new BitmapDrawable(bitmap));
+                mLeftBottomPrintView.setTag("1");
             }else if (BITMAP_LEFT_BOOTOM2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
                 mLeftBottomPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mLeftBottomPrintView2.getWidth())));
+                mLeftBottomPrintView2.setTag("1");
             }else if (BITMAP_RIGHT_TOP2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
                 mRightTopPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mRightTopPrintView2.getWidth())));
+                mRightTopPrintView2.setTag("1");
             }else if (BITMAP_RIGHT_BOTTOM2 == requestCode){
                 Bitmap bit = BitmapUtil.getBundlerBitmap();
                 mRightBottomPrintView2.setBackground(new BitmapDrawable(BitmapUtil.zoomImg(bit,mRightBottomPrintView2.getWidth())));
+                mRightBottomPrintView2.setTag("1");
             }
 
         }
@@ -459,8 +474,13 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
     /*
     获取当前view的bitmap
+    根据view的tag 判断是否有签名和签章图片，如果没有，直接返回空string
+    tag = 1 有签章图片
      */
     private String getViewBitmapBase64(View view){
+        if (view.getTag().toString().equals("0")){
+            return  "";
+        }
         view.setDrawingCacheEnabled(true);
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
         view.setDrawingCacheEnabled(false);
@@ -510,7 +530,7 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
 
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
+        int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
         DateSelectUtil.showDatePickerDialog(getContext(), android.app.AlertDialog.THEME_HOLO_LIGHT,
                 "请选择年月日", year, month, day, new DateSelectUtil.OnDatePickerListener(){
@@ -543,4 +563,63 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
         }
         return Integer.parseInt(str);
     }
+//
+//    private boolean checkEdittextIsEmpty(View rootView) {
+//        if (rootView instanceof EditText){
+//            if (TextUtils.isEmpty(((EditText) rootView).getText())){
+//                //edittext为空
+//                ScrollView scrollView = getActivity().findViewById(R.id.sv_scrollview_id);
+//                scrollView.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        scrollView.smoothScrollTo(0,rootView.getTop());
+//                    }
+//                });
+//                return  false;
+//            }
+//        }
+//        if (rootView instanceof ViewGroup) {
+//            ViewGroup viewGroup = (ViewGroup) rootView;
+//            int childCount = viewGroup.getChildCount();
+//            for (int i = 0; i < childCount; i++) {
+//                View child = viewGroup.getChildAt(i);
+//                checkEdittextIsEmpty(child);
+//            }
+//        }
+//        return  true;
+//    }
+
+
+    private boolean checkEdittextIsEmpty(View rootView){
+        ArrayDeque queue = new ArrayDeque<>();
+        queue.addLast(rootView);
+        while (!queue.isEmpty()) {
+            View temp = (View) queue.getLast();
+            //队尾出队
+            queue.pollLast();
+            if (temp instanceof ViewGroup) {
+                int childCount = ((ViewGroup) temp).getChildCount();
+                for (int i = childCount-1; i >= 0; i--) {
+                    queue.addLast(((ViewGroup) temp).getChildAt(i));
+                }
+            }
+            //业务：如果view设置了listener那么就设置Touch监听
+            if (temp instanceof EditText){
+                if (TextUtils.isEmpty(((EditText) temp).getText())){
+                    //edittext为空
+                    ScrollView scrollView = getActivity().findViewById(R.id.sv_scrollview_id);
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.smoothScrollTo(0,temp.getTop());
+                        }
+                    });
+                    temp.requestFocus();
+                    return  false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
