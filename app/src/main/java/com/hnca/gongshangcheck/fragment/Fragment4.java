@@ -17,7 +17,7 @@ import com.hnca.gongshangcheck.R;
 import static android.app.Activity.RESULT_OK;
 
 public class Fragment4 extends Fragment {
-    private final static String TAG = "Fragment3";
+    private final static String TAG = "Fragment3 ";
     TextView texttest;
     ImageView imgPreview;
 
