@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG="MainActivity";
     private ViewPager mViewPager;
     private BottomNavigationView mNavigation;
+    private long exitTime=0;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -153,4 +155,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            YUtils.showToast("再按一次退出程序");
+            exitTime = System.currentTimeMillis();
+        }
+        else{
+                finish();
+                System.exit(0);
+            }
+        }
 }

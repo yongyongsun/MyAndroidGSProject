@@ -603,7 +603,23 @@ public class Fragment2 extends Fragment implements OnDialogCancelListener {
                     queue.addLast(((ViewGroup) temp).getChildAt(i));
                 }
             }
-            //业务：如果view设置了listener那么就设置Touch监听
+
+            //临时加一些判断，判断某一些项可以为空情况
+            //获取当前edittext自定义控件的父view，判断ID过滤。
+            if (temp instanceof EditText){
+                String str = ((EditText) temp).getText().toString();
+                ViewGroup owner = (ViewGroup) temp.getParent().getParent();
+                int nviewid = owner.getId();
+                if (nviewid == R.id.sub_iv_level || nviewid == R.id.tv_manufacture_data
+                        || nviewid == R.id.sub_iv_operator_postalcode || nviewid == R.id.sub_iv_operator_owner_fax
+                        || nviewid ==R.id.sub_iv_product_supplier_fax || nviewid == R.id.sub_iv_operator_mail )
+                {
+                    continue;
+                }
+            }
+
+
+
             if (temp instanceof EditText){
                 if (TextUtils.isEmpty(((EditText) temp).getText())){
                     //edittext为空

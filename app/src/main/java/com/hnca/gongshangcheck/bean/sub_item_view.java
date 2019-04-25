@@ -46,7 +46,7 @@ public class sub_item_view extends LinearLayout {
             if (strtype.equals(TAG_CLASS_TEXT)) {
                 editText.setInputType(InputType.TYPE_CLASS_TEXT);
             } else if (strtype.equals(TAG_CLASS_NUM)) {
-                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             } else if (strtype.equals(TAG_CLASS_PHONE)) {
                 editText.setInputType(InputType.TYPE_CLASS_PHONE);
             }
