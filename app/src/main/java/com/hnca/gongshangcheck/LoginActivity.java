@@ -349,6 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 response = client.newCall(requestPost).execute();//得到Response
 
                 String strResponse = response.body().string();
+                Log.i("Login strResponse",strResponse);
                 if (strResponse.indexOf("200") != -1) {
                     //YUtils.showToast("screenwidth:" + YUtils.getScreenWidth() + " screenheight :" + YUtils.getScreenHeight());
                     mUserInfoObject = g.fromJson(strResponse, LoginUserInfo.class);//把JSON字符串转为对象
@@ -364,7 +365,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     appState.setLoginUserInfo(mUserInfoObject);
                     return true;
                 }else {
-                    Log.e("LoginActivity userinfo:", response.body().string());
+                    Log.e("LoginActivity userinfo:", strResponse);
                     return false;
                 }
             } catch (IOException e) {

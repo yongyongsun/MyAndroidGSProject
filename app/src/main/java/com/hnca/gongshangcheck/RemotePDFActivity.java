@@ -44,6 +44,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
     PDFPagerAdapter adapter;
     private TextView mTvTipsInfo;
     private String mPdfUrl = null;
+    private boolean bFirstStart = false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,18 +86,20 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
 
     @Override
     protected void onStart() {
-        Log.i(TAG, "onStart: ");
+        Log.i(TAG, "onStart mPdfUrl=  " + mPdfUrl);
         super.onStart();
-        if (remotePDFViewPager == null) {
-            if (mPdfUrl == null){
-                YUtils.showToast(TAG + "打开PDF URL 为空");
-                return;
-            }
-
-            remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
-                    RemotePDFActivity.this);
+        if (bFirstStart){
+            return;
+        }
+        if (mPdfUrl == null) {
+            YUtils.showToast(TAG + "打开PDF URL 为空");
+            return;
         }
 
+        remotePDFViewPager = new RemotePDFViewPager(getBaseContext(), mPdfUrl,
+                RemotePDFActivity.this);
+
+        bFirstStart = true;
     }
 
     @Override
@@ -150,8 +153,8 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
 
     @Override
     public void onSuccess(String url, String destinationPath) {
-        Log.i(TAG, "onSuccess: ");
-        adapter = new PDFPagerAdapter(this, FileUtil.extractFileNameFromURL(url));
+        Log.i(TAG, "onSuccess url= "+ url + "  destinationPath = " + destinationPath);
+        adapter = new PDFPagerAdapter(this, destinationPath);
         remotePDFViewPager.setAdapter(adapter);
         updateLayout();
         //showDownloadButton();
