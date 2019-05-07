@@ -152,7 +152,7 @@ public class RemotePDFActivity extends BaseSampleActivity implements DownloadFil
 
     @Override
     public void onSuccess(String url, String destinationPath) {
-        Log.i(TAG, "onSuccess: ");
+        Log.i(TAG, "onSuccess url= "+ url + "  destinationPath = " + destinationPath);
         adapter = new PngPagerAdapter(this, destinationPath);
         remotePDFViewPager.setAdapter(adapter);
         updateLayout();
