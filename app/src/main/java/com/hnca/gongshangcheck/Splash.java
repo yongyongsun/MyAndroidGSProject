@@ -1,13 +1,16 @@
 package com.hnca.gongshangcheck;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.lang.reflect.Method;
 
 
 public class Splash extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    //windowManager_ScreenDensity();
+                    windowManager_ScreenDensity();
                     sleep(2400);//使程序休眠五秒
                     Intent it=new Intent(getApplicationContext(),LoginActivity.class);//启动MainActivity
                     startActivity(it);
@@ -64,7 +67,44 @@ public class Splash extends AppCompatActivity {
         int dpi = displayMetrics.densityDpi;
         float density = displayMetrics.density;
 
-        Log.i("Splash", "width->" + width + "--height-->" + height + "--dpi-->" + dpi + "---density-->" + density);
+        Log.i("Splash", "width->" + width + "--height-->" + height
+                + "--dpi-->" + dpi + "---density-->" + density + "---xdpi -->" + displayMetrics.xdpi
+                + "--ydpi-->" + displayMetrics.ydpi);
 
+    }
+
+    /**
+     * @param context
+     * @return 获取屏幕原始尺寸高度，包括虚拟功能键高度
+     */
+    private int getTotalHeight(Context context) {
+        int dpi = 0;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        @SuppressWarnings("rawtypes")
+        Class c;
+        try {
+            c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, displayMetrics);
+            dpi = displayMetrics.heightPixels;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dpi;
+    }
+
+    /**
+     * @param context
+     * @return 获取屏幕内容高度不包括虚拟按键
+     */
+    private int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
     }
 }
