@@ -34,7 +34,7 @@
         <ImageView
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:background="@drawable/splash"/>
+            android:background="@mipmap/splash"/>
 
         <View
             android:layout_width="match_parent"

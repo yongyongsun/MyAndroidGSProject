@@ -2,6 +2,7 @@ package com.hnca.gongshangcheck;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -9,12 +10,14 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import java.lang.reflect.Method;
 
 
 public class Splash extends AppCompatActivity {
 
+    private ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState);
@@ -23,12 +26,24 @@ public class Splash extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);//这里全屏显示
 
         setContentView(R.layout.activity_splash);
+
+        imgView = (ImageView) findViewById(R.id.imageView2);
         Thread myThread=new Thread(){//创建子线程
             @Override
             public void run() {
                 try{
                     windowManager_ScreenDensity();
                     sleep(2400);//使程序休眠五秒
+
+                    int nwidth = imgView.getWidth();
+                    int nheight = imgView.getHeight();
+                    Log.i("Splash","imageView2,width = " + nwidth + " nheight = " + nheight);
+
+                    //其中 sw320dp 代表屏幕的最小宽度是320dp，下面是获取屏幕最小宽度的代码
+                    Configuration config = getResources().getConfiguration();
+                    int  smallestScreenWidth = config.smallestScreenWidthDp;
+                    Log.i("Splash", "smallestScreenWidth: "  + smallestScreenWidth);
+
                     Intent it=new Intent(getApplicationContext(),LoginActivity.class);//启动MainActivity
                     startActivity(it);
                     finish();//关闭当前活动
